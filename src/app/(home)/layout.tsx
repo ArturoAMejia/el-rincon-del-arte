@@ -1,5 +1,5 @@
-import { Footer } from "@/componets/shared/footer";
-import { Header } from "@/componets/shared/header";
+import { Footer } from "@/components/shared/footer";
+import { Header } from "@/components/shared/header";
 
 export default function HomeLayout({
   children,
@@ -9,7 +9,7 @@ export default function HomeLayout({
   return (
     <>
       <Header />
-      <main className="container mx-auto max-w-7xl">{children}</main>
+      <main className="container mx-auto max-w-7xl mt-28">{children}</main>
       <Footer />
     </>
   );
