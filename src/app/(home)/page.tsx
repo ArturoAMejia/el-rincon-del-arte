@@ -1,6 +1,6 @@
-import { BannerPromotion } from "@/components/home/banner-promotion";
-import { FeaturedCategories } from "@/components/home/featured-categories";
-import { MainContent } from "@/components/home/main-content";
+import { BannerPromotion } from "@/modules/home/components/banner-promotion"
+import { FeaturedCategories } from "@/modules/home/components/featured-categories"
+import { MainContent } from "@/modules/home/components/main-content"
 // import Image from "next/image";
 
 export default function Home() {
@@ -10,5 +10,5 @@ export default function Home() {
       <FeaturedCategories />
       <BannerPromotion />
     </section>
-  );
+  )
 }

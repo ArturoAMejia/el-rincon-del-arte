@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const ArtworkPage = () => {
-  return (
-    <div>ArtworkPage</div>
-  )
+  return <div>ArtworkPage</div>
 }
 
 export default ArtworkPage
