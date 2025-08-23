@@ -1,5 +1,4 @@
-import { AdminBarChart } from "@/components/admin/charts/bar-chart";
-import React from "react";
+import { AdminBarChart } from "@/modules/admin/components/charts"
 
 const AdminPage = () => {
   return (
@@ -16,7 +15,7 @@ const AdminPage = () => {
         <div className="min-h-[100vh] flex-1 rounded-md bg-black/50 md:min-h-min" />
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AdminPage;
+export default AdminPage

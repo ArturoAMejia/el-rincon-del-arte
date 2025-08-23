@@ -1,5 +1,3 @@
-import { AdminBreadcrumb } from "@/components/admin/admin-breadcrumb";
-import { AdminSidebar } from "@/components/shared/admin-sidebar";
 // import {
 //   Breadcrumb,
 //   BreadcrumbItem,
@@ -9,9 +7,10 @@ import { AdminSidebar } from "@/components/shared/admin-sidebar";
 //   BreadcrumbSeparator,
 // } from "@/components/ui/breadcrumb";
 // import { Separator } from "@/components/ui/separator";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { AdminBreadcrumb, AdminSidebar } from "@/modules/admin"
+
+import { SidebarProvider } from "@/shared/components/sidebar"
 // import { usePathname } from "next/navigation";
-import React from "react";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -22,7 +21,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
     </SidebarProvider>
-  );
-};
+  )
+}
 
-export default AdminLayout;
+export default AdminLayout
