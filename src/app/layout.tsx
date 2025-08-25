@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import { Poppins, Playfair_Display } from "next/font/google"
+import { Playfair_Display, Inter } from "next/font/google"
 import "./globals.css"
 
-const poppins = Poppins({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-poppins",
+  variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
 })
 
@@ -25,10 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${poppins.variable} ${playfairDisplay.variable}`}
-    >
+    <html lang="en" className={`${inter.variable} ${playfairDisplay.variable}`}>
       <body className="font-sans">{children}</body>
     </html>
   )
