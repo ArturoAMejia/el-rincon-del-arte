@@ -16,9 +16,9 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <AdminSidebar />
-      <main className="p-4 w-full">
+      <main className="p-4 w-full ">
         <AdminBreadcrumb />
-        {children}
+        <section className="p-12">{children}</section>
       </main>
     </SidebarProvider>
   )
