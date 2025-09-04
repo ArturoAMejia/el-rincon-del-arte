@@ -8,9 +8,7 @@ import React from "react"
 export default function ArtworkPage() {
   return (
     <section>
-      <h1 className="text-2xl font-bold">Obras de Arte</h1>
-      golaa
-      <p>aas</p>
+      <h1 className="text-2xl font-bold mb-4">Obras de Arte</h1>
       <DataTable columns={columns} data={payments} />
     </section>
   )

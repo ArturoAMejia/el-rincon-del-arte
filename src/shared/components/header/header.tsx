@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Menu } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../button"
+import { ThemeToggle } from "../theme-toggle"
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -67,6 +68,9 @@ export const Header = () => {
                     ¡Ver más!
                   </Button>
                 </Link>
+              </li>
+              <li>
+                <ThemeToggle />
               </li>
             </ul>
           </nav>
