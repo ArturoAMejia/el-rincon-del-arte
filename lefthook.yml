@@ -1,0 +1,8 @@
+pre-commit:
+  jobs:
+    - name: linter
+      run: bun lint
+pre-push:
+  jobs:
+    - name: commitlint
+      run: npx commitlint --from HEAD~1 --to HEAD --verbose
