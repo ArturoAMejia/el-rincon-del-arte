@@ -16,7 +16,7 @@ model size {
   artwork    artwork[]
 }
 
-model colection {
+model collection {
   id          Int       @id @default(autoincrement())
   state       state     @relation(fields: [state_id], references: [id])
   state_id    Int       @default(1)
@@ -45,8 +45,8 @@ model artwork {
   price          Float
   painter        painter          @relation(fields: [painter_id], references: [id])
   painter_id     Int
-  colection_id   Int
-  colection      colection        @relation(fields: [colection_id], references: [id])
+  colectlion_id   Int
+  collection      collection        @relation(fields: [colectlion_id], references: [id])
   category_id    Int
   category       category         @relation(fields: [category_id], references: [id])
   type_art_id    Int

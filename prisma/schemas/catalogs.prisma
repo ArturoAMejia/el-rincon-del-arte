@@ -9,7 +9,7 @@ model state {
   voucher    voucher[]
   sale       sale[]
   role       role[]
-  colection  colection[]
+  collection  collection[]
   painter    painter[]
   client     client[]
   User       User[]
