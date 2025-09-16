@@ -1,0 +1,61 @@
+model state {
+  id         Int         @id @default(autoincrement())
+  name       String
+  created_at DateTime    @default(now())
+  person     person[]
+  category   category[]
+  size       size[]
+  artwork    artwork[]
+  voucher    voucher[]
+  sale       sale[]
+  role       role[]
+  colection  colection[]
+  painter    painter[]
+  client     client[]
+  User       User[]
+  type_art   type_art[]
+}
+
+model voucher {
+  id                 Int              @id @default(autoincrement())
+  state_id           Int              @default(1)
+  state              state            @relation(fields: [state_id], references: [id])
+  client_id          Int
+  client             client           @relation(fields: [client_id], references: [id])
+  currency_id        Int
+  currency           currency         @relation(fields: [currency_id], references: [id])
+  form_of_payment_id Int
+  form_of_payment    form_of_payment  @relation(fields: [form_of_payment_id], references: [id])
+  numeration         String           @unique @default(uuid())
+  serie              String           @unique @default(uuid())
+  created_at         DateTime         @default(now())
+  voucher_detail     voucher_detail[]
+  sale               sale[]
+}
+
+model voucher_detail {
+  id         Int      @id @default(autoincrement())
+  voucher_id Int
+  voucher    voucher  @relation(fields: [voucher_id], references: [id])
+  artwork_id Int
+  artwork    artwork  @relation(fields: [artwork_id], references: [id])
+  quantity   Int
+  price      Float
+  created_at DateTime @default(now())
+}
+
+model currency {
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  voucher    voucher[]
+  sale       sale[]
+}
+
+model form_of_payment {
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  voucher    voucher[]
+  sale       sale[]
+}

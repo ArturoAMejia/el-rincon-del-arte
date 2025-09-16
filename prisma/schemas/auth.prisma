@@ -1,0 +1,163 @@
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+  person        person?   @relation(fields: [personId], references: [id])
+  personId      Int?
+  role          role?     @relation(fields: [roleId], references: [id])
+  roleId        Int?
+  state         state?    @relation(fields: [stateId], references: [id])
+  stateId       Int?
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model person {
+  id                      Int       @id @default(autoincrement())
+  state_id                Int       @default(1)
+  name                    String
+  last_name_business_name String
+  id_ruc                  String    @unique
+  phone_number            String    @default("")
+  email                   String
+  birthday                DateTime
+  address                 String    @default("")
+  created_at              DateTime  @default(now())
+  state                   state     @relation(fields: [state_id], references: [id])
+  client                  client[]
+  painter                 painter[]
+  User                    User[]
+}
+
+model client {
+  id          Int       @id @default(autoincrement())
+  state       state     @relation(fields: [state_id], references: [id])
+  state_id    Int       @default(1)
+  person_id   Int
+  person      person    @relation(fields: [person_id], references: [id])
+  client_type String
+  gender      String
+  created_at  DateTime  @default(now())
+  voucher     voucher[]
+  sale        sale[]
+}
+
+model painter {
+  id         Int       @id @default(autoincrement())
+  state      state     @relation(fields: [state_id], references: [id])
+  state_id   Int       @default(1)
+  person_id  Int
+  person     person    @relation(fields: [person_id], references: [id])
+  bio        String
+  style      String
+  image      String
+  created_at DateTime  @default(now())
+  artwork    artwork[]
+}
+
+model role {
+  id              Int               @id @default(autoincrement())
+  state_id        Int               @default(1)
+  state           state             @relation(fields: [state_id], references: [id])
+  name            String
+  created_at      DateTime          @default(now())
+  module_role     module_role[]
+  sub_module_role sub_module_role[]
+  User            User[]
+}
+
+model module {
+  id              Int               @id @default(autoincrement())
+  name            String
+  description     String
+  icon            String
+  created_at      DateTime          @default(now())
+  sub_module      sub_module[]
+  module_role     module_role[]
+  sub_module_role sub_module_role[]
+}
+
+model sub_module {
+  id              Int               @id @default(autoincrement())
+  module_id       Int
+  module          module            @relation(fields: [module_id], references: [id])
+  name            String
+  icon            String
+  url             String
+  created_at      DateTime          @default(now())
+  sub_module_role sub_module_role[]
+}
+
+model module_role {
+  role      role   @relation(fields: [role_id], references: [id])
+  role_id   Int
+  module    module @relation(fields: [module_id], references: [id])
+  module_id Int
+  name      String
+
+  @@id([role_id, module_id])
+}
+
+model sub_module_role {
+  role          role       @relation(fields: [role_id], references: [id])
+  role_id       Int
+  module        module     @relation(fields: [module_id], references: [id])
+  module_id     Int
+  sub_module    sub_module @relation(fields: [sub_module_id], references: [id])
+  sub_module_id Int
+  name          String
+
+  @@id([role_id, sub_module_id])
+}
