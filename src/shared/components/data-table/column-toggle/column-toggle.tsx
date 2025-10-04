@@ -5,15 +5,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/shared/components/dropdown-menu"
-import { Button } from "@/shared/components/button"
-import { Table } from "@tanstack/react-table"
-import { Settings2 } from "lucide-react"
+} from "@/shared/components/dropdown-menu";
+import { Button } from "@/shared/components/button";
+import { Table } from "@tanstack/react-table";
+import { Settings2 } from "lucide-react";
 
 export const DataTableViewOptions = <TData,>({
   table,
 }: {
-  table: Table<TData>
+  table: Table<TData>;
 }) => {
   return (
     <DropdownMenu>
@@ -44,11 +44,11 @@ export const DataTableViewOptions = <TData,>({
                 checked={column.getIsVisible()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {column.id}
+                {column.accessorFn?.name ?? column.id}
               </DropdownMenuCheckboxItem>
-            )
+            );
           })}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
