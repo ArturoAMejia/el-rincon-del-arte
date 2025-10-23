@@ -1,21 +1,23 @@
-import { getArtistsAction } from "@/modules/admin/artist/actions";
+import {
+  getArtistsAction,
+  getCategoriesAction,
+  getCollectionsAction,
+  getSizesAction,
+  getTypesArtAction,
+} from "@/modules/admin";
 import { getArtworksAction } from "@/modules/admin/artwork/actions";
-import { artworkColumns } from "@/modules/admin/artwork/components";
-import { getCategoriesAction } from "@/modules/admin/category/actions";
-import { getCollectionsAction } from "@/modules/admin/collection/actions";
-import { CreateArtworkForm } from "@/modules/admin/artwork/components";
-import { getSizesAction } from "@/modules/admin/size/actions/size.actions";
-import { getTypesArtAction } from "@/modules/admin/type-art/actions/type-art.actions";
-import { DataTable } from "@/shared/components";
-import React from "react";
+import {
+  CreateArtworkForm,
+  ArtworkDataTableClient,
+} from "@/modules/admin/artwork/components";
 
 export default async function ArtworkPage() {
-  const artworks = await getArtworksAction();
-  const artists = await getArtistsAction();
-  const categories = await getCategoriesAction();
-  const collections = await getCollectionsAction();
-  const sizes = await getSizesAction();
-  const typesArt = await getTypesArtAction();
+  const allArtworks = await getArtworksAction();
+  const allArtists = await getArtistsAction();
+  const allCategories = await getCategoriesAction();
+  const allSizes = await getSizesAction();
+  const allCollections = await getCollectionsAction();
+  const allTypesArt = await getTypesArtAction();
 
   return (
     <section>
@@ -25,14 +27,21 @@ export default async function ArtworkPage() {
           <p>Administra las obras de arte de la plataforma.</p>
         </div>
         <CreateArtworkForm
-          artists={artists?.data}
-          categories={categories?.data}
-          collections={collections?.data}
-          sizes={sizes?.data}
-          typesArt={typesArt?.data}
+          artists={allArtists.data || []}
+          categories={allCategories.data || []}
+          sizes={allSizes.data || []}
+          collections={allCollections.data || []}
+          typesArt={allTypesArt.data || []}
         />
       </div>
-      <DataTable columns={artworkColumns} data={artworks?.data || []} />
+      <ArtworkDataTableClient
+        data={allArtworks?.data || []}
+        artists={allArtists?.data || []}
+        categories={allCategories?.data || []}
+        collections={allCollections?.data || []}
+        sizes={allSizes?.data || []}
+        typesArt={allTypesArt?.data || []}
+      />
     </section>
   );
 }

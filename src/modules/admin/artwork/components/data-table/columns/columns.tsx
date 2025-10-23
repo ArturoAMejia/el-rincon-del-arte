@@ -1,29 +1,20 @@
-"use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/shared/components/data-table/column";
 import { ArtworkEntity } from "@/modules/admin/artwork/interfaces";
-import { UpdateArtworkForm } from "../form/update-artwork-form";
-import { CategoryEntity } from "@/modules/admin/category";
-import { CollectionEntity } from "@/modules/admin/collection";
-import { SizeEntity } from "@/modules/admin/size";
-import { TypeArtEntity } from "@/modules/admin/type-art";
-import { ArtistEntity } from "@/modules/admin/artist";
+import { ArtistEntity } from "@/modules/admin/artist/interfaces";
+import { CategoryEntity } from "@/modules/admin/category/interfaces";
+import { CollectionEntity } from "@/modules/admin/collection/interfaces";
+import { SizeEntity } from "@/modules/admin/size/interfaces";
+import { TypeArtEntity } from "@/modules/admin/type-art/interfaces";
+import { ArtworkRowActions } from "../row-actions";
 
-type ArtworkColumnDeps = {
-  artists: ArtistEntity[];
-  categories: CategoryEntity[];
-  collections: CollectionEntity[];
-  sizes: SizeEntity[];
-  typesArt: TypeArtEntity[];
-};
-
-export const getArtworkColumns = ({
-  artists,
-  categories,
-  collections,
-  sizes,
-  typesArt,
-}: ArtworkColumnDeps): ColumnDef<ArtworkEntity>[] => [
+export const getArtworkColumns = (
+  artists?: ArtistEntity[],
+  categories?: CategoryEntity[],
+  collections?: CollectionEntity[],
+  sizes?: SizeEntity[],
+  typesArt?: TypeArtEntity[]
+): ColumnDef<ArtworkEntity>[] => [
   {
     accessorKey: "id",
     header: "ID",
@@ -64,7 +55,7 @@ export const getArtworkColumns = ({
     accessorKey: "actions",
     header: "Acciones",
     cell: ({ row }) => (
-      <UpdateArtworkForm
+      <ArtworkRowActions
         artwork={row.original}
         artists={artists}
         categories={categories}
@@ -72,13 +63,6 @@ export const getArtworkColumns = ({
         sizes={sizes}
         typesArt={typesArt}
       />
-      // <DataTableRowActions
-      //   row={row}
-      //   updateAction={}
-      //   onAction={(action, row) => {
-      //     console.log(action, row);
-      //   }}
-      // />
     ),
   },
 ];

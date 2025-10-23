@@ -51,7 +51,7 @@ export async function createArtworkAction(
 
 export async function getArtworksAction(): Promise<{
   success: boolean;
-  data?: ArtworkEntity[];
+  data: ArtworkEntity[];
   error?: string;
 }> {
   try {
@@ -69,12 +69,14 @@ export async function getArtworksAction(): Promise<{
       return {
         success: false,
         error: error.message,
+        data: [],
       };
     }
 
     return {
       success: false,
       error: "An unexpected error occurred",
+      data: [],
     };
   }
 }

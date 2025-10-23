@@ -8,12 +8,16 @@ export const getArtworkById = async (
   try {
     const artwork = await prisma.artwork.findFirst({
       include: {
-        category: { select: { name: true } },
-        collection: { select: { name: true } },
-        size: { select: { name: true } },
+        category: { select: { id: true, name: true } },
+        collection: { select: { id: true, name: true } },
+        type_art: { select: { id: true, name: true } },
+        size: { select: { id: true, name: true } },
         artist: {
           select: {
-            person: { select: { name: true, last_name_business_name: true } },
+            id: true,
+            person: {
+              select: { id: true, name: true, last_name_business_name: true },
+            },
           },
         },
       },

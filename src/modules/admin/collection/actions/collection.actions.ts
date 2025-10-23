@@ -15,7 +15,7 @@ export const getCollectionsAction = async (): Promise<{
       data: collections,
     };
   } catch (error) {
-    console.error("Error al obtener las colecciones  :", error);
+    console.error("Error al obtener las colecciones:", error);
 
     if (error instanceof Error) {
       return {

@@ -3,14 +3,14 @@ import { artwork } from "@/generated/prisma";
 export class ArtworkMapper {
   static toDTO(
     entity: artwork & {
-      category: { id: number; name: string } | null;
-      type_art: { id: number; name: string } | null;
-      collection: { id: number; name: string } | null;
-      size: { id: number; name: string } | null;
+      category: { id: number; name: string };
+      type_art: { id: number; name: string };
+      collection: { id: number; name: string };
+      size: { id: number; name: string };
       artist: {
         id: number;
         person: { name: string; last_name_business_name: string };
-      } | null;
+      };
     }
   ) {
     return {

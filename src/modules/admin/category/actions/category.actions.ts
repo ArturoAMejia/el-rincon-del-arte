@@ -7,15 +7,15 @@ export const getCategoriesAction = async (): Promise<{
   error?: string;
 }> => {
   try {
-    // Get all artists
-    const artists = await getCategories();
+    // Get all categories
+    const categories = await getCategories();
 
     return {
       success: true,
-      data: artists,
+      data: categories,
     };
   } catch (error) {
-    console.error("Error al obtener los artistas  :", error);
+    console.error("Error al obtener las categorías  :", error);
 
     if (error instanceof Error) {
       return {

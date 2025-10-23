@@ -15,7 +15,7 @@ export const getSizesAction = async (): Promise<{
       data: sizes,
     };
   } catch (error) {
-    console.error("Error al obtener las tallas  :", error);
+    console.error("Error al obtener las tallas:", error);
 
     if (error instanceof Error) {
       return {

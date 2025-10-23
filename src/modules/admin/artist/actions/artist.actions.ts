@@ -15,7 +15,7 @@ export const getArtistsAction = async (): Promise<{
       data: artists,
     };
   } catch (error) {
-    console.error("Error al obtener los artistas  :", error);
+    console.error("Error al obtener los artistas:", error);
 
     if (error instanceof Error) {
       return {

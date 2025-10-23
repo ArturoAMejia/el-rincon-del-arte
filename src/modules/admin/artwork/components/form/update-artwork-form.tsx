@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { Edit } from "lucide-react";
 import { updateArtworkAction } from "../../actions/artwork.actions";
 import { Button } from "@/shared/components/button";
@@ -43,11 +43,31 @@ import { ArtworkEntity } from "../../interfaces";
 
 interface UpdateArtworkFormProps {
   artwork?: ArtworkEntity;
-  artists?: ArtistEntity[];
-  categories?: CategoryEntity[];
-  collections?: CollectionEntity[];
-  sizes?: SizeEntity[];
-  typesArt?: TypeArtEntity[];
+  artists: Promise<{
+    success: boolean;
+    data?: ArtistEntity[];
+    error?: string;
+  }>;
+  categories: Promise<{
+    success: boolean;
+    data?: CategoryEntity[];
+    error?: string;
+  }>;
+  collections: Promise<{
+    success: boolean;
+    data?: CollectionEntity[];
+    error?: string;
+  }>;
+  sizes: Promise<{
+    success: boolean;
+    data?: SizeEntity[];
+    error?: string;
+  }>;
+  typesArt: Promise<{
+    success: boolean;
+    data?: TypeArtEntity[];
+    error?: string;
+  }>;
 }
 
 export const UpdateArtworkForm = ({
@@ -58,6 +78,12 @@ export const UpdateArtworkForm = ({
   sizes,
   typesArt,
 }: UpdateArtworkFormProps) => {
+  console.log(artwork);
+  const { data: allArtists } = use(artists);
+  const { data: allCategories } = use(categories);
+  const { data: allCollections } = use(collections);
+  const { data: allSizes } = use(sizes);
+  const { data: allTypesArt } = use(typesArt);
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -139,14 +165,14 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Artista</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona un artista para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {artists?.map((artist) => (
+                      {allArtists?.map((artist) => (
                         <SelectItem
                           key={artist.id}
                           value={artist.id.toString()}
@@ -167,14 +193,14 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Categoría</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un artista para esta obra" />
+                        <SelectValue placeholder="Selecciona una categoría para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {categories?.map((category) => (
+                      {allCategories?.map((category) => (
                         <SelectItem
                           key={category.id}
                           value={category.id.toString()}
@@ -195,14 +221,14 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Colección</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona una colección para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {collections?.map((collection) => (
+                      {allCollections?.map((collection) => (
                         <SelectItem
                           key={collection.id}
                           value={collection.id.toString()}
@@ -223,14 +249,14 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Medidas</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un artista para esta obra" />
+                        <SelectValue placeholder="Selecciona una medida para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {sizes?.map((size) => (
+                      {allSizes?.map((size) => (
                         <SelectItem key={size.id} value={size.id.toString()}>
                           {size.name}
                         </SelectItem>
@@ -248,14 +274,14 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Tipo de arte</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un artista para esta obra" />
+                        <SelectValue placeholder="Selecciona un tipo de arte para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {typesArt?.map((typeArt) => (
+                      {allTypesArt?.map((typeArt) => (
                         <SelectItem
                           key={typeArt.id}
                           value={typeArt.id.toString()}

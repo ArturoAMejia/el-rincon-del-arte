@@ -163,7 +163,7 @@ export const CreateArtworkForm = ({
                   <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un artista para esta obra" />
+                        <SelectValue placeholder="Selecciona una categoría para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -219,7 +219,7 @@ export const CreateArtworkForm = ({
                   <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un artista para esta obra" />
+                        <SelectValue placeholder="Selecciona una medida para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -244,7 +244,7 @@ export const CreateArtworkForm = ({
                   <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un artista para esta obra" />
+                        <SelectValue placeholder="Selecciona un tipo de arte para esta obra" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
