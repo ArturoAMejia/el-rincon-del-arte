@@ -2,7 +2,7 @@
 
 import { Search } from "lucide-react"
 import { Input } from "@/shared/components/input"
-import { Badge } from "../../badge"
+import { Badge } from "../../badge/badge"
 
 interface DataTableHeaderProps {
   searchQuery: string

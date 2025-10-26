@@ -10,6 +10,8 @@ import {
   CreateArtworkForm,
   ArtworkDataTableClient,
 } from "@/modules/admin/artwork/components";
+import { DataTableSkeleton } from "@/shared/components";
+import { Suspense } from "react";
 
 export default async function ArtworkPage() {
   const allArtworks = await getArtworksAction();
@@ -26,6 +28,7 @@ export default async function ArtworkPage() {
           <h1 className="text-2xl font-bold">Obras de Arte</h1>
           <p>Administra las obras de arte de la plataforma.</p>
         </div>
+
         <CreateArtworkForm
           artists={allArtists.data || []}
           categories={allCategories.data || []}
@@ -34,14 +37,17 @@ export default async function ArtworkPage() {
           typesArt={allTypesArt.data || []}
         />
       </div>
-      <ArtworkDataTableClient
-        data={allArtworks?.data || []}
-        artists={allArtists?.data || []}
-        categories={allCategories?.data || []}
-        collections={allCollections?.data || []}
-        sizes={allSizes?.data || []}
-        typesArt={allTypesArt?.data || []}
-      />
+
+      <Suspense fallback={<DataTableSkeleton />}>
+        <ArtworkDataTableClient
+          data={allArtworks?.data}
+          artists={allArtists?.data}
+          categories={allCategories?.data}
+          collections={allCollections?.data}
+          sizes={allSizes?.data}
+          typesArt={allTypesArt?.data}
+        />
+      </Suspense>
     </section>
   );
 }

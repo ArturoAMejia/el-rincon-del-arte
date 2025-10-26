@@ -1,20 +1,9 @@
+'use client'
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/shared/components/data-table/column";
 import { ArtworkEntity } from "@/modules/admin/artwork/interfaces";
-import { ArtistEntity } from "@/modules/admin/artist/interfaces";
-import { CategoryEntity } from "@/modules/admin/category/interfaces";
-import { CollectionEntity } from "@/modules/admin/collection/interfaces";
-import { SizeEntity } from "@/modules/admin/size/interfaces";
-import { TypeArtEntity } from "@/modules/admin/type-art/interfaces";
-import { ArtworkRowActions } from "../row-actions";
 
-export const getArtworkColumns = (
-  artists?: ArtistEntity[],
-  categories?: CategoryEntity[],
-  collections?: CollectionEntity[],
-  sizes?: SizeEntity[],
-  typesArt?: TypeArtEntity[]
-): ColumnDef<ArtworkEntity>[] => [
+export const artworkColumns: ColumnDef<ArtworkEntity>[] = [
   {
     accessorKey: "id",
     header: "ID",
@@ -50,19 +39,5 @@ export const getArtworkColumns = (
   {
     accessorKey: "price",
     header: "Precio",
-  },
-  {
-    accessorKey: "actions",
-    header: "Acciones",
-    cell: ({ row }) => (
-      <ArtworkRowActions
-        artwork={row.original}
-        artists={artists}
-        categories={categories}
-        collections={collections}
-        sizes={sizes}
-        typesArt={typesArt}
-      />
-    ),
   },
 ];

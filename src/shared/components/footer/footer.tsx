@@ -1,8 +1,7 @@
-import { FacebookIcon, InstagramIcon } from "lucide-react"
-import Link from "next/link"
+import { FacebookIcon, InstagramIcon } from "lucide-react";
+import Link from "next/link";
 
 export const Footer = () => {
-  const date = new Date()
   return (
     <footer className="h-auto bg-primary">
       <nav className="flex flex-wrap justify-center p-8">
@@ -25,9 +24,8 @@ export const Footer = () => {
         </div>
       </nav>
       <nav className="bg-black p-3 text-center text-sm text-white">
-        Copyright &#169; {date.getFullYear()} DevNica Solutions. Todos los
-        derechos reservados.
+        Copyright &#169; 2025 DevNica Solutions. Todos los derechos reservados.
       </nav>
     </footer>
-  )
-}
+  );
+};

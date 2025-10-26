@@ -1,14 +1,13 @@
 "use client";
 
-import React from "react";
 import { UpdateArtworkForm } from "@/modules/admin/artwork/components/form/update-artwork-form";
-import { DataTableRowActions } from "@/shared/components/data-table/row-actions";
 import { ArtworkEntity } from "@/modules/admin/artwork/interfaces";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { CategoryEntity } from "@/modules/admin/category/interfaces";
 import { CollectionEntity } from "@/modules/admin/collection/interfaces";
 import { SizeEntity } from "@/modules/admin/size/interfaces";
 import { TypeArtEntity } from "@/modules/admin/type-art/interfaces";
+import { DeactivateArtwork } from "../../form/deactivate-artwork";
 
 interface Props {
   artwork: ArtworkEntity;
@@ -37,11 +36,7 @@ export const ArtworkRowActions = ({
         sizes={Promise.resolve({ success: true, data: sizes })}
         typesArt={Promise.resolve({ success: true, data: typesArt })}
       />
-
-      <DataTableRowActions
-        row={artwork}
-        onAction={(action, row) => console.log(action, row)}
-      />
+      <DeactivateArtwork id={Number(artwork.id)} />
     </div>
   );
 };

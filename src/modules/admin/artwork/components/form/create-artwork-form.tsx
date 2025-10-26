@@ -13,7 +13,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/form";
+} from "@/shared/components/form/form";
 import {
   Select,
   SelectContent,
@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components";
-import { Textarea } from "@/shared/components/textarea";
+import { Textarea } from "@/shared/components/textarea/textarea";
 import {
   Dialog,
   DialogClose,
@@ -30,7 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/shared/components/dialog";
+} from "@/shared/components/dialog/dialog";
 import { ArtistEntity } from "../../../artist/interfaces";
 import { CategoryEntity } from "../../../category/interfaces";
 import { CollectionEntity } from "../../../collection/interfaces";

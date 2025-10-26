@@ -19,6 +19,8 @@ export const getArtworks = async (): Promise<ArtworkEntity[]> => {
           },
         },
       },
+      where: { state_id: { equals: 1 } },
+      orderBy: { id: "asc" },
     });
     return artworks.map((artwork) => ArtworkMapper.toDTO(artwork));
   } catch (error) {

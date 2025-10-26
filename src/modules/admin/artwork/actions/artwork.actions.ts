@@ -4,8 +4,11 @@ import { getArtworkById, getArtworks } from "../services";
 import { ArtworkEntity } from "../interfaces";
 import { createArtworkService } from "../services/create-artwork";
 import { CreateArtworkDto, UpdateArtworkDto } from "../dto/artwork.dto";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { updateArtworkService } from "../services/update-artwork";
+import { cacheTag } from "next/cache";
+import { deactivateArtworkService } from "../services/deactivate-artwork";
 
 export async function createArtworkAction(
   formData: CreateArtworkDto
@@ -26,7 +29,7 @@ export async function createArtworkAction(
 
     const newArtwork = await createArtworkService(artworkData);
 
-    revalidatePath("/admin/obras-de-arte");
+    revalidateTag("artworks", "max");
 
     return {
       success: true,
@@ -54,6 +57,8 @@ export async function getArtworksAction(): Promise<{
   data: ArtworkEntity[];
   error?: string;
 }> {
+  "use cache";
+  cacheTag("artworks");
   try {
     // Get all artworks
     const artworks = await getArtworks();
@@ -154,5 +159,23 @@ export async function updateArtworkAction(
       success: false,
       error: "An unexpected error occurred",
     };
+  }
+}
+
+export async function deactivateArtwork(
+  id: number
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await deactivateArtworkService(id);
+
+    updateTag("artworks");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error al desactivar la obra de arte:", error);
+    if (error instanceof Error) {
+      return { success: false, error: error.message };
+    }
+    return { success: false, error: "An unexpected error occurred" };
   }
 }
