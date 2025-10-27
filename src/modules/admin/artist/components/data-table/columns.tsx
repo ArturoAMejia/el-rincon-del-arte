@@ -1,5 +1,4 @@
 import { DataTableColumnHeader } from "@/shared/components/data-table/column";
-import { DataTableRowActions } from "@/shared/components/data-table/row-actions";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 

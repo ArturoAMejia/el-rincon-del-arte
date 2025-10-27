@@ -4,7 +4,9 @@ import { CategoryEntity } from "../interfaces";
 
 export const getCategories = async (): Promise<CategoryEntity[] | []> => {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({
+      where: { state_id: 1 },
+    });
 
     if (!categories) return [];
     return categories.map(CategoryMapper.toDTO);
