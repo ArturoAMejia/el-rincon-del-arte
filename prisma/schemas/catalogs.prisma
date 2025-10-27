@@ -1,7 +1,7 @@
 model state {
-  id         Int         @id @default(autoincrement())
+  id         Int          @id @default(autoincrement())
   name       String
-  created_at DateTime    @default(now())
+  created_at DateTime     @default(now())
   person     person[]
   category   category[]
   size       size[]
@@ -9,8 +9,8 @@ model state {
   voucher    voucher[]
   sale       sale[]
   role       role[]
-  collection  collection[]
-  painter    painter[]
+  collection collection[]
+  artist     artist[]
   client     client[]
   User       User[]
   type_art   type_art[]

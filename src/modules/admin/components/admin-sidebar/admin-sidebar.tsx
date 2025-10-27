@@ -39,15 +39,15 @@ const data = {
       items: [
         {
           title: "Categorías",
-          url: "/admin/categorias",
+          url: "/admin/obras-de-arte/categorias",
         },
         {
           title: "Coleciones",
-          url: "/admin/coleciones",
+          url: "/admin/obras-de-arte/coleciones",
         },
         {
-          title: "Tamaños",
-          url: "/admin/tamaños",
+          title: "Medidas",
+          url: "/admin/obras-de-arte/medidas",
         },
       ],
     },

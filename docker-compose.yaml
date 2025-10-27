@@ -1,7 +1,7 @@
 services:
   myDB:
     image: postgres:16
-    container_name: embajadores-ambientales-db
+    container_name: el-rincon-del-arte-db
     restart: always
     ports:
       - 5432:5432

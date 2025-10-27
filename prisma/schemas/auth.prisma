@@ -65,19 +65,19 @@ model Verification {
 }
 
 model person {
-  id                      Int       @id @default(autoincrement())
-  state_id                Int       @default(1)
+  id                      Int      @id @default(autoincrement())
+  state_id                Int      @default(1)
   name                    String
   last_name_business_name String
-  id_ruc                  String    @unique
-  phone_number            String    @default("")
+  id_ruc                  String   @unique
+  phone_number            String   @default("")
   email                   String
   birthday                DateTime
-  address                 String    @default("")
-  created_at              DateTime  @default(now())
-  state                   state     @relation(fields: [state_id], references: [id])
+  address                 String   @default("")
+  created_at              DateTime @default(now())
+  state                   state    @relation(fields: [state_id], references: [id])
   client                  client[]
-  painter                 painter[]
+  artist                  artist[]
   User                    User[]
 }
 
@@ -94,7 +94,7 @@ model client {
   sale        sale[]
 }
 
-model painter {
+model artist {
   id         Int       @id @default(autoincrement())
   state      state     @relation(fields: [state_id], references: [id])
   state_id   Int       @default(1)

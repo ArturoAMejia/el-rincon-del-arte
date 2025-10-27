@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -8,8 +8,9 @@ import {
   SortingState,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { Card, CardHeader } from "@/shared/components/card"
+  getPaginationRowModel,
+} from "@tanstack/react-table";
+import { Card, CardHeader } from "@/shared/components/card";
 import {
   Table,
   TableBody,
@@ -17,36 +18,37 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../table"
-import { Pagination } from "./pagination"
-import { DataTableHeader } from "./header"
-import { DataTableViewOptions } from "./column-toggle/column-toggle"
+} from "../table";
+import { Pagination } from "./pagination";
+import { DataTableHeader } from "./header";
+import { DataTableViewOptions } from "./column-toggle/column-toggle";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
 export const DataTable = <TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) => {
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>([]);
 
-  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.ceil(data.length / 10);
 
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     state: {
       sorting,
     },
-  })
+  });
 
   return (
     <Card className="p-4">
@@ -75,7 +77,7 @@ export const DataTable = <TData, TValue>({
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -111,12 +113,15 @@ export const DataTable = <TData, TValue>({
         </Table>
       </div>
       <Pagination
-        currentPage={currentPage}
-        totalPages={0}
-        pageSize={0}
-        totalItems={0}
-        onPageChange={() => setCurrentPage(currentPage + 1)}
+        currentPage={1}
+        totalPages={totalPages}
+        pageSize={10}
+        totalItems={data.length}
+        previousPage={table.previousPage}
+        nextPage={table.nextPage}
+        getCanPreviousPage={table.getCanPreviousPage}
+        getCanNextPage={table.getCanNextPage}
       />
     </Card>
-  )
-}
+  );
+};

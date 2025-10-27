@@ -4,6 +4,7 @@ import { Menu } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../button"
 import { ThemeToggle } from "../theme-toggle"
+import Image from "next/image"
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -13,7 +14,13 @@ export const Header = () => {
       <div className="container mx-auto max-w-7xl px-4 md:px-0">
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <img className="w-32" src="/img/logo.png" alt="" />
+            <Image
+              className="w-32"
+              src="/img/logo.png"
+              alt=""
+              width={100}
+              height={100}
+            />
           </Link>
 
           <button

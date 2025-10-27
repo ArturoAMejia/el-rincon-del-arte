@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react"
 import { Button } from "@/shared/components/button"
-import { Badge } from "@/shared/components/badge"
+import { Badge } from "@/shared/components/badge/badge"
 import {
   Select,
   SelectContent,
