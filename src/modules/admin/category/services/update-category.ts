@@ -26,6 +26,6 @@ export const updateCategoryService = async (
     return CategoryMapper.toDTO(updated);
   } catch (error) {
     console.error("Error al actualizar la categoría", error);
-    throw `Error al actualizar la categoría: ${error}`;
+    throw new Error(`Error al actualizar la categoría: ${error}`);
   }
 };

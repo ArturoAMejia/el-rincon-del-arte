@@ -6,10 +6,6 @@ import { CategoryMapper } from "../mappers/category.mapper";
 export const createCategoryService = async (
   category: CreateCategoryDto
 ): Promise<CategoryEntity> => {
-  if (!category.name) {
-    throw new Error("El nombre es obligatorio");
-  }
-
   try {
     const newCategory = createCategoryDto.parse(category);
 
@@ -22,6 +18,6 @@ export const createCategoryService = async (
     return CategoryMapper.toDTO(created);
   } catch (error) {
     console.error("Error al crear la categoría", error);
-    throw `Error al crear la categoría: ${error}`;
+    throw new Error(`Error al crear la categoría: ${error}`);
   }
 };

@@ -11,6 +11,4 @@ export const deactivateCategoryService = async (id: number): Promise<void> => {
     where: { id },
     data: { state_id: 2 },
   });
-
-  return;
 };

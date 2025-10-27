@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag, cacheTag, updateTag } from "next/cache";
+import { cacheTag, updateTag } from "next/cache";
 import { CategoryEntity } from "../interfaces";
 import {
   getCategories,

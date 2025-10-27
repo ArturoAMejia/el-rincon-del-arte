@@ -8,10 +8,13 @@ interface Props {
 }
 
 export const CategoryRowActions = ({ category }: Props) => {
+  if (!category) {
+    return null;
+  }
   return (
     <div className="flex items-center gap-2">
-      <UpdateCategoryForm category={category!} />
-      <DeactivateCategory id={Number(category!.id)} />
+      <UpdateCategoryForm category={category} />
+      <DeactivateCategory id={Number(category.id)} />
     </div>
   );
 };
