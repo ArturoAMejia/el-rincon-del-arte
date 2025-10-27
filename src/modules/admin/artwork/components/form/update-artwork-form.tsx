@@ -78,7 +78,6 @@ export const UpdateArtworkForm = ({
   sizes,
   typesArt,
 }: UpdateArtworkFormProps) => {
-  console.log(artwork);
   const { data: allArtists } = use(artists);
   const { data: allCategories } = use(categories);
   const { data: allCollections } = use(collections);
@@ -104,7 +103,6 @@ export const UpdateArtworkForm = ({
   });
 
   const handleSubmit = async (formData: UpdateArtworkDto) => {
-    console.log("test");
     setIsLoading(true);
 
     try {
@@ -118,7 +116,7 @@ export const UpdateArtworkForm = ({
         toast.error(result.error || "Error al actualizar la obra");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error al actualizar la obra:", error);
     } finally {
       setIsLoading(false);
     }
@@ -165,7 +163,10 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Artista</FormLabel>
-                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona un artista para esta obra" />
@@ -193,7 +194,10 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Categoría</FormLabel>
-                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona una categoría para esta obra" />
@@ -221,7 +225,10 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Colección</FormLabel>
-                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona una colección para esta obra" />
@@ -249,7 +256,10 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Medidas</FormLabel>
-                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona una medida para esta obra" />
@@ -274,7 +284,10 @@ export const UpdateArtworkForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Tipo de arte</FormLabel>
-                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Selecciona un tipo de arte para esta obra" />

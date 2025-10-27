@@ -44,8 +44,9 @@ export const DeactivateArtwork = ({ id }: Props) => {
             ¿Estás seguro que deseas desactivar esta obra?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Esta acción no se puede deshacer. Esto desactivará permanentemente
-            tu obra y eliminará tus datos de nuestros servidores.
+            Esta acción no se puede deshacer. Esto marcará tu obra como
+            inactiva, por lo que ya no será visible ni accesible para los
+            usuarios, pero no se eliminarán tus datos de nuestros servidores.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

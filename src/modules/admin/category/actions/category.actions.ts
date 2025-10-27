@@ -15,7 +15,7 @@ export const getCategoriesAction = async (): Promise<{
       data: categories,
     };
   } catch (error) {
-    console.error("Error al obtener las categorías  :", error);
+    console.error("Error al obtener las categorías:", error);
 
     if (error instanceof Error) {
       return {

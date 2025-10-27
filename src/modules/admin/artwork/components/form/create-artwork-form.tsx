@@ -73,7 +73,6 @@ export const CreateArtworkForm = ({
   });
 
   const handleSubmit = async (formData: CreateArtworkDto) => {
-    console.log("test");
     setIsLoading(true);
 
     try {
@@ -87,7 +86,7 @@ export const CreateArtworkForm = ({
         toast.error(result.error || "Error al crear la obra");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error al crear la obra:", error);
     } finally {
       setIsLoading(false);
     }

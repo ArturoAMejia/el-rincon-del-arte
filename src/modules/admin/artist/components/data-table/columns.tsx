@@ -33,13 +33,5 @@ export const artistsColumns: ColumnDef<ArtistEntity>[] = [
   {
     accessorKey: "actions",
     header: "Acciones",
-    cell: ({ row }) => (
-      <DataTableRowActions
-        row={row}
-        onAction={(action, row) => {
-          console.log(action, row);
-        }}
-      />
-    ),
   },
 ];

@@ -1,14 +1,15 @@
 "use server";
 
-import { getArtworkById, getArtworks } from "../services";
+import { revalidateTag, cacheTag, updateTag } from "next/cache";
 import { ArtworkEntity } from "../interfaces";
-import { createArtworkService } from "../services/create-artwork";
+import {
+  getArtworkById,
+  getArtworks,
+  createArtworkService,
+  updateArtworkService,
+  deactivateArtworkService,
+} from "../services";
 import { CreateArtworkDto, UpdateArtworkDto } from "../dto/artwork.dto";
-import { revalidatePath, updateTag } from "next/cache";
-import { revalidateTag } from "next/cache";
-import { updateArtworkService } from "../services/update-artwork";
-import { cacheTag } from "next/cache";
-import { deactivateArtworkService } from "../services/deactivate-artwork";
 
 export async function createArtworkAction(
   formData: CreateArtworkDto
@@ -139,8 +140,7 @@ export async function updateArtworkAction(
 
     const updatedArtwork = await updateArtworkService(id, artworkData);
 
-    revalidatePath("/admin/obras-de-arte");
-
+    revalidateTag("artworks", "max");
     return {
       success: true,
       data: updatedArtwork,

@@ -50,15 +50,6 @@ export const Pagination = ({
           variant="outline"
           size="sm"
           onClick={() => previousPage()}
-          disabled={currentPage === 1}
-        >
-          <ChevronsLeft className="h-4 w-4" />
-        </Button>
-
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => previousPage()}
           disabled={!getCanPreviousPage()}
         >
           <ChevronLeft className="h-4 w-4" />
@@ -66,10 +57,7 @@ export const Pagination = ({
 
         <div className="flex items-center gap-1">
           <span className="text-sm">Página</span>
-          <Select
-            value={currentPage.toString()}
-            // onValueChange={(value) => onPageChange(Number.parseInt(value))}
-          >
+          <Select value={currentPage.toString()}>
             <SelectTrigger className="w-16 h-8">
               <SelectValue />
             </SelectTrigger>
@@ -93,15 +81,6 @@ export const Pagination = ({
           disabled={!getCanNextPage()}
         >
           <ChevronRight className="h-4 w-4" />
-        </Button>
-
-        <Button
-          variant="outline"
-          size="sm"
-          // onClick={() => onPageChange(totalPages)}
-          disabled={currentPage === totalPages}
-        >
-          <ChevronsRight className="h-4 w-4" />
         </Button>
       </div>
     </div>
