@@ -4,7 +4,9 @@ import { CollectionEntity } from "../interfaces";
 
 export const getCollections = async (): Promise<CollectionEntity[] | []> => {
   try {
-    const collections = await prisma.collection.findMany();
+    const collections = await prisma.collection.findMany({
+      where: { state_id: 1 },
+    });
 
     if (!collections) return [];
     return collections.map(CollectionMapper.toDTO);

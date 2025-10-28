@@ -42,8 +42,8 @@ const data = {
           url: "/admin/obras-de-arte/categorias",
         },
         {
-          title: "Coleciones",
-          url: "/admin/obras-de-arte/coleciones",
+          title: "Colecciones",
+          url: "/admin/obras-de-arte/colecciones",
         },
         {
           title: "Medidas",
