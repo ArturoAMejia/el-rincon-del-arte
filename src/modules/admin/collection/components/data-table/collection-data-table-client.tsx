@@ -27,27 +27,9 @@ export const CollectionDataTableClient = ({ data }: Props) => {
       header: "Descripción",
     },
     {
-      accessorKey: "state_id",
-      header: "Estado",
-      cell: ({ row }) => {
-        const stateId = row.getValue("state_id") as number;
-        const stateNames = {
-          1: "Activo",
-          2: "Inactivo", 
-          3: "Pendiente",
-          4: "Borrado",
-          5: "Vendido",
-          6: "Reservado"
-        };
-        return stateNames[stateId as keyof typeof stateNames] || "Desconocido";
-      },
-    },
-    {
       accessorKey: "actions",
       header: "Acciones",
-      cell: ({ row }) => (
-        <CollectionRowActions collection={row.original} />
-      ),
+      cell: ({ row }) => <CollectionRowActions collection={row.original} />,
     },
   ];
 
