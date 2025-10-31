@@ -9,10 +9,6 @@ import { SizeMapper } from "@/modules/admin/size/mappers";
 export const createSizeService = async (
   size: CreateSizeDto
 ): Promise<SizeEntity> => {
-  if (!size.name) {
-    throw new Error("El nombre es obligatorio");
-  }
-
   try {
     const newSize = createSizeDto.parse(size);
 
@@ -25,7 +21,7 @@ export const createSizeService = async (
 
     return SizeMapper.toDTO(created);
   } catch (error) {
-    console.error("Error creating size", error);
+    console.error("Error creating size:", error);
     throw new Error(String(error));
   }
 };

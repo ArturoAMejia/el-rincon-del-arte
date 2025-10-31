@@ -7,14 +7,13 @@ import { SizeEntity } from "@/modules/admin/size/interfaces";
 import { SizeMapper } from "@/modules/admin/size/mappers";
 
 export const updateSizeService = async (
-  id: number,
   size: UpdateSizeDto
 ): Promise<SizeEntity> => {
   try {
     const parsed = updateSizeDto.parse(size);
 
     const updated = await prisma.size.update({
-      where: { id },
+      where: { id: size.id },
       data: {
         name: parsed.name,
       },

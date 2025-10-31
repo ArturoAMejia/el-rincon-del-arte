@@ -18,7 +18,14 @@ export default async function Page() {
       </div>
 
       <Suspense fallback={<DataTableSkeleton />}>
-        <DataTable columns={sizesColumns} data={allSizes?.data} />
+        {allSizes.success ? (
+          <DataTable columns={sizesColumns} data={allSizes.data} />
+        ) : (
+          <div className="text-red-600 font-semibold py-4">
+            Ocurrió un error al cargar las medidas. Por favor, inténtalo de
+            nuevo más tarde.
+          </div>
+        )}
       </Suspense>
     </section>
   );

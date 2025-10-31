@@ -7,7 +7,7 @@ export const createSizeDto = z.object({
 export type CreateSizeDto = z.infer<typeof createSizeDto>;
 
 export const updateSizeDto = createSizeDto.extend({
-  id: z.number("El id es obligatorio"),
+  id: z.number({ message: "El id es obligatorio" }),
 });
 
 export type UpdateSizeDto = z.infer<typeof updateSizeDto>;

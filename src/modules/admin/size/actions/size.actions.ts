@@ -71,11 +71,10 @@ export async function getSizeByIdAction(id: number): Promise<{
 }
 
 export async function updateSizeAction(
-  id: number,
   formData: UpdateSizeDto
 ): Promise<{ success: boolean; data?: SizeEntity; error?: string }> {
   try {
-    const updated = await updateSizeService(id, formData);
+    const updated = await updateSizeService(formData);
 
     updateTag("sizes");
 
