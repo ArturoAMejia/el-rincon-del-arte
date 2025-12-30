@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfairDisplay.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans">
+      <body className="font-sans bg-background">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

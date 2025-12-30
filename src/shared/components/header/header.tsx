@@ -1,88 +1,107 @@
-"use client"
-import { useState } from "react"
-import { Menu } from "lucide-react"
-import Link from "next/link"
-import { Button } from "../button"
-import { ThemeToggle } from "../theme-toggle"
-import Image from "next/image"
+"use client";
+
+import { useState } from "react";
+import { Menu, X, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { ThemeToggle } from "../theme-toggle";
 
 export const Header = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 bg-primary backdrop-blur-sm">
-      <div className="container mx-auto max-w-7xl px-4 md:px-0">
-        <div className="flex h-20 items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <Image
-              className="w-32"
-              src="/img/logo.png"
-              alt=""
-              width={100}
-              height={100}
-            />
-          </Link>
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex-1">
+            <h1 className="text-2xl font-light tracking-widest text-foreground">
+              El Rincón del Arte
+            </h1>
+          </div>
 
-          <button
-            className="text-[#D3D3D3 lg:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-
-          <nav
-            className={`${
-              isOpen ? "block" : "hidden"
-            } absolute left-0 top-20 w-full bg-primary lg:relative lg:top-0 lg:block lg:w-auto lg:bg-transparent`}
-          >
-            <ul className="flex flex-col items-center gap-6 p-4 lg:flex-row lg:p-0">
-              <li>
-                <Link
-                  href="/"
-                  className="text-[#D3D3D3] hover:underline hover:decoration-accent hover:decoration-4"
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/artistas"
-                  className="text-[#D3D3D3] hover:underline hover:decoration-accent hover:decoration-4"
-                >
-                  Artistas
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/obras"
-                  className="text-[#D3D3D3] hover:underline hover:decoration-accent hover:decoration-4"
-                >
-                  Obras
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contacto"
-                  className="text-[#D3D3D3] hover:underline hover:decoration-accent hover:decoration-4"
-                >
-                  Contacto
-                </Link>
-              </li>
-
-              <li>
-                <Link href={"/obras"}>
-                  <Button className="bg-secondary-accent font-bold text-black">
-                    ¡Ver más!
-                  </Button>
-                </Link>
-              </li>
-              <li>
-                <ThemeToggle />
-              </li>
-            </ul>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8 flex-1 justify-center">
+            <Link
+              href="#"
+              className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
+            >
+              INICIO
+            </Link>
+            <Link
+              href="#"
+              className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
+            >
+              ARTISTAS
+            </Link>
+            <Link
+              href="#"
+              className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
+            >
+              OBRAS
+            </Link>
+            <Link
+              href="#"
+              className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5 text-center"
+            >
+              SOBRE NOSOTROS
+            </Link>
+            <Link
+              href="#"
+              className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
+            >
+              CONTACTO
+            </Link>
           </nav>
+
+          <div className="flex items-center gap-4 flex-1 justify-end">
+            <button className="p-2 hover:bg-muted rounded-lg transition-colors">
+              <ShoppingCart size={20} className="text-foreground" />
+            </button>
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <nav className="md:hidden mt-4 space-y-2 pb-4">
+            <Link
+              href="#"
+              className="block text-sm text-foreground/70 hover:text-foreground py-2 transition-colors"
+            >
+              INICIO
+            </Link>
+            <Link
+              href="#"
+              className="block text-sm text-foreground/70 hover:text-foreground py-2 transition-colors"
+            >
+              ARTISTAS
+            </Link>
+            <Link
+              href="#"
+              className="block text-sm text-foreground/70 hover:text-foreground py-2 transition-colors"
+            >
+              OBRAS
+            </Link>
+            <Link
+              href="#"
+              className="block text-sm text-foreground/70 hover:text-foreground py-2 transition-colors"
+            >
+              SOBRE NOSOTROS
+            </Link>
+            <Link
+              href="#"
+              className="block text-sm text-foreground/70 hover:text-foreground py-2 transition-colors"
+            >
+              CONTACTO
+            </Link>
+          </nav>
+        )}
       </div>
     </header>
-  )
-}
+  );
+};

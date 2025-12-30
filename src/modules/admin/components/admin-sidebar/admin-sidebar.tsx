@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Command,
   DollarSign,
@@ -10,7 +10,7 @@ import {
   PieChart,
   Send,
   Settings2,
-} from "lucide-react"
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,11 +19,11 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/shared/components/sidebar"
-import { NavMain } from "@/shared/components/nav-main"
-import { NavUser } from "@/shared/components/nav-user"
-import { NavSecondary } from "@/shared/components/nav-secondary"
-import Link from "next/link"
+} from "@/shared/components/sidebar";
+import { NavMain } from "@/shared/components/nav-main";
+import { NavUser } from "@/shared/components/nav-user";
+import { NavSecondary } from "@/shared/components/nav-secondary";
+import Link from "next/link";
 
 const data = {
   user: {
@@ -53,43 +53,39 @@ const data = {
     },
     {
       title: "Ventas",
-      url: "#",
+      url: "/admin/ventas",
       icon: DollarSign,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Ordenes",
+          url: "/admin/ventas/ordenes",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Pagos",
+          url: "/admin/ventas/pagos",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Formas de pago",
+          url: "/admin/ventas/formas-de-pago",
+        },
+        {
+          title: "Comprobantes",
+          url: "/admin/ventas/comprobantes",
         },
       ],
     },
     {
-      title: "Artistas",
-      url: "#",
+      title: "Usuarios",
+      url: "/admin/usuarios",
       icon: Palette,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "Artistas",
+          url: "/admin/usuarios/artistas",
         },
         {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Coleccionistas",
+          url: "/admin/usuarios/coleccionistas",
         },
       ],
     },
@@ -146,7 +142,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AdminSidebar({
   ...props
@@ -180,5 +176,5 @@ export function AdminSidebar({
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

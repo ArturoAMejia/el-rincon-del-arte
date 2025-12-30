@@ -14,4 +14,5 @@ export interface ArtworkEntity {
   type_art: string | null;
   size_id: number;
   size: string | null;
+  quantity?: number;
 }
