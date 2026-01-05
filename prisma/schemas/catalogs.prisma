@@ -33,17 +33,6 @@ model voucher {
   sale               sale[]
 }
 
-model voucher_detail {
-  id         Int      @id @default(autoincrement())
-  voucher_id Int
-  voucher    voucher  @relation(fields: [voucher_id], references: [id])
-  artwork_id Int
-  artwork    artwork  @relation(fields: [artwork_id], references: [id])
-  quantity   Int
-  price      Float
-  created_at DateTime @default(now())
-}
-
 model currency {
   id         Int       @id @default(autoincrement())
   name       String

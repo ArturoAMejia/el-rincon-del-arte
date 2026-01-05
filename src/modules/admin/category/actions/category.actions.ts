@@ -7,7 +7,6 @@ import {
   createCategoryService,
   updateCategoryService,
   deactivateCategoryService,
-  // getCategoryById could be added later if needed
 } from "../services";
 import { CreateCategoryDto, UpdateCategoryDto } from "../dto/category.dto";
 
