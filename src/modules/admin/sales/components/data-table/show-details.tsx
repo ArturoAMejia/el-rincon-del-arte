@@ -147,7 +147,9 @@ export const ShowSalesDetails = ({ sale }: Props) => {
                 </span>
               </div>
               <div className="flex gap-4 text-sm">
-                <span className="text-muted-foreground">Tax (15%):</span>
+                <span className="text-muted-foreground">
+                  Impuesto ({Number(process.env.NEXT_PUBLIC_TAX_RATE) * 100}%):
+                </span>
                 <span className="font-medium w-24 text-right">
                   ${sale.tax.toFixed(2)}
                 </span>

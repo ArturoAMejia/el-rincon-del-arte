@@ -12,7 +12,7 @@ export const getClients = async (): Promise<ClientEntity[] | []> => {
     if (!clients) return [];
     return clients.map(ClientMapper.toDTO);
   } catch (error) {
-    console.error(`Error al obtener las colecciones`, error);
+    console.error(`Error al obtener los clientes`, error);
     throw error;
   }
 };

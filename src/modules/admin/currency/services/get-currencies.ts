@@ -9,7 +9,7 @@ export const getCurrencies = async (): Promise<CurrencyEntity[] | []> => {
     if (!currencies) return [];
     return currencies.map(CurrencyMapper.toDTO);
   } catch (error) {
-    console.error(`Error al obtener las colecciones`, error);
+    console.error(`Error al obtener las monedas`, error);
     throw error;
   }
 };

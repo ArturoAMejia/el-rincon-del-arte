@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 export const MainContent = () => {
   return (
@@ -85,6 +84,8 @@ export const MainContent = () => {
         </div>
       </section>
 
+      {/* todo carrousel */}
+      {/* 
       <section className="lg:pb-15 my-5 pb-10 md:my-8 md:pb-12 lg:my-12">
         <div
           className="relative"
@@ -105,9 +106,10 @@ export const MainContent = () => {
               >
                 <div className="relative h-[330px] lg:h-[440px] xl:h-[600px]">
                   <Image
-                    src="https://library.shadcnblocks.com/images/block/photos/simone-hutsch-9jsQcDsxyqA-unsplash.jpg"
+                    src="/images/home/bento-2.jpg"
                     alt="Charter team member working"
                     className="object-cover"
+                    fill={true}
                   />
                 </div>
               </div>
@@ -119,9 +121,10 @@ export const MainContent = () => {
               >
                 <div className="relative h-[330px] lg:h-[440px] xl:h-[600px]">
                   <Image
-                    src="https://library.shadcnblocks.com/images/block/photos/simone-hutsch-9jsQcDsxyqA-unsplash.jpg"
+                    src="/images/home/bento-2.jpg"
                     alt="Modern workspace setup"
                     className="object-cover"
+                    fill={true}
                   />
                 </div>
               </div>
@@ -133,32 +136,35 @@ export const MainContent = () => {
               >
                 <div className="relative h-[330px] lg:h-[440px] xl:h-[600px]">
                   <Image
-                    src="https://library.shadcnblocks.com/images/block/photos/simone-hutsch-9jsQcDsxyqA-unsplash.jpg"
+                    src="/images/home/bento-2.jpg"
                     alt="Team collaboration"
                     className="object-cover"
+                    fill={true}
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <section className="container">
         <div className="ml-auto mr-0 max-w-2xl space-y-5 md:space-y-8 lg:space-y-10">
           <p className="text-lg">
-            We started building CoreAPI in 2019 and launched in 2022. Every
-            endpoint has been designed from the ground up — with no technical
-            debt or legacy systems. We are purpose-built to power financial
-            innovation for the next hundred years.
+            Empezamos el desarrollo de El Rincón del Arte en 2019 y lo lanzamos
+            en 2022. Cada funcionalidad ha sido diseñada desde cero, sin deuda
+            técnica ni sistemas heredados. Estamos construidos para impulsar la
+            innovación artística durante los próximos cien años.
           </p>
           <h2 className="text-2xl font-medium tracking-tight md:text-3xl">
-            We are a bit of a unique company — not your standard tech or fintech
-            company.
+            Somos una empresa un poco única — no somos una empresa tecnológica o
+            fintech estándar. company.
           </h2>
           <p className="text-lg">
-            We are 100% founder and team-owned, profitable, and we keep our team
-            lean. Over time, this page will become more polished, but for now,
-            were focused on delivering for developers.
+            Somos 100% fundadores y propiedad del equipo, rentables y mantenemos
+            nuestro equipo reducido. Con el tiempo, esta página se volverá más
+            pulida, pero por ahora, nos enfocamos en cumplir con los artistas.
+            Si estás interesado en construir el futuro del arte, consulta
+            nuestras vacantes abiertas a continuación.
           </p>
         </div>
       </section>
@@ -166,21 +172,18 @@ export const MainContent = () => {
         <div className="grid gap-5 md:grid-cols-2 md:gap-10 lg:gap-16">
           <div className="order-2 md:order-1">
             <h2 className="text-4xl font-semibold tracking-tight md:text-4xl">
-              The founding team
+              El equipo fundador
             </h2>
             <p className="mt-5 text-lg md:mt-6">
-              We started building CoreAPI in 2019 and launched in 2022. Every
-              endpoint has been designed from the ground up — with no technical
-              debt or legacy systems. We are purpose-built to power financial
-              innovation for the next hundred years. We are 100% founder and
-              team-owned, profitable, and we keep our team lean. Over time, this
-              page will become more polished, but for now, were focused on
-              delivering for developers. If youre interested in building the
-              future of financial APIs, check out our open roles below.
+              Somos un equipo pequeño y dedicado de ingenieros y diseñadores
+              apasionados por el arte y la tecnología. Creemos en el poder del
+              arte para transformar vidas y estamos comprometidos a crear una
+              plataforma que empodere a los artistas y conecte con los amantes
+              del arte en todo el mundo.
             </p>
           </div>
           <Image
-            src="https://library.shadcnblocks.com/images/block/photos/simone-hutsch-9jsQcDsxyqA-unsplash.jpg"
+            src="/images/home/bento-2.jpg"
             alt="Founding team collaboration"
             width="480"
             height="400"

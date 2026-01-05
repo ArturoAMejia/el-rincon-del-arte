@@ -10,7 +10,7 @@ export const getCurrenciesAction = async (): Promise<{
   error?: string;
 }> => {
   "use cache";
-  cacheTag("collections");
+  cacheTag("currencies");
   try {
     // Get all clients
     const currencies = await getCurrencies();

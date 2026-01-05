@@ -10,7 +10,7 @@ export const getFormOfPayments = async (): Promise<
     if (!form_of_payments) return [];
     return form_of_payments.map(FormOfPaymentMapper.toDTO);
   } catch (error) {
-    console.error(`Error al obtener las colecciones`, error);
+    console.error(`Error al obtener las formas de pago`, error);
     throw error;
   }
 };
