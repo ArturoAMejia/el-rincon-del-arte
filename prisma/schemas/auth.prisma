@@ -91,7 +91,7 @@ model client {
   gender      String
   created_at  DateTime  @default(now())
   voucher     voucher[]
-  sale        sale[]
+  order        order[]
 }
 
 model artist {

@@ -2,14 +2,14 @@ import { getArtworksAction } from "@/modules/admin";
 import { getClientsAction } from "@/modules/admin/client";
 import { getCurrenciesAction } from "@/modules/admin/currency";
 import { getFormOfPaymentsAction } from "@/modules/admin/form-of-payment";
-// import { getOrdersAction } from "@/modules/admin/order/actions";
-// import { salesColumns } from "@/modules/admin/order/components/data-table/columns";
+import { getOrdersAction } from "@/modules/admin/order/actions";
+import { orderColumns } from "@/modules/admin/order/components/data-table/columns";
 import { CreateSaleForm } from "@/modules/admin/order/components/form/create-sale-form";
-import { DataTableSkeleton } from "@/shared/components";
+import { DataTable, DataTableSkeleton } from "@/shared/components";
 import { Suspense } from "react";
 
-const VentasPage = async () => {
-  // const orders = await getOrderAction();
+const OrderPage = async () => {
+  const orders = await getOrdersAction();
   const artworks = await getArtworksAction();
   const clients = await getClientsAction();
   const currencies = await getCurrenciesAction();
@@ -19,8 +19,8 @@ const VentasPage = async () => {
     <section>
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Ventas</h1>
-          <p>Administra las ventas de obras de arte de la plataforma.</p>
+          <h1 className="text-2xl font-bold">Ordenes</h1>
+          <p>Administra las ordenes de obras de arte de la plataforma.</p>
         </div>
         <CreateSaleForm
           artworks={artworks?.data || []}
@@ -31,10 +31,10 @@ const VentasPage = async () => {
       </div>
 
       <Suspense fallback={<DataTableSkeleton />}>
-        {/* <DataTable columns={salesColumns} data={sales?.data} /> */}
+        <DataTable columns={orderColumns} data={orders?.data} />
       </Suspense>
     </section>
   );
 };
 
-export default VentasPage;
+export default OrderPage;

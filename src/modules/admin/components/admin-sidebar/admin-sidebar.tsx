@@ -6,10 +6,10 @@ import {
   LifeBuoy,
   Map,
   PaintbrushVertical,
-  Palette,
   PieChart,
   Send,
   Settings2,
+  Users,
 } from "lucide-react";
 import {
   Sidebar,
@@ -77,15 +77,15 @@ const data = {
     {
       title: "Usuarios",
       url: "/admin/usuarios",
-      icon: Palette,
+      icon: Users,
       items: [
         {
           title: "Artistas",
           url: "/admin/usuarios/artistas",
         },
         {
-          title: "Coleccionistas",
-          url: "/admin/usuarios/coleccionistas",
+          title: "Clientes",
+          url: "/admin/usuarios/clientes",
         },
       ],
     },
