@@ -40,7 +40,7 @@ interface Props {
   formOfPayments: FormOfPaymentEntity[];
 }
 
-export const CreateSaleForm = ({
+export const CreateOrderForm = ({
   artworks,
   clients,
   currencies,
@@ -90,7 +90,7 @@ export const CreateSaleForm = ({
 
   const handleSubmit = async (formData: CreateOrderDto) => {
     if (cartItems.length === 0) {
-      toast.error("Agrega al menos una obra a la venta");
+      toast.error("Agrega al menos una obra a la orden");
       return;
     }
 
@@ -111,15 +111,15 @@ export const CreateSaleForm = ({
       const result = await createOrderAction(safeFormData, safeCartItems);
 
       if (result.success) {
-        toast.success("Venta creada con éxito");
+        toast.success("Orden generada con éxito");
         setOpen(false);
         form.reset();
         clearCart();
       } else {
-        toast.error(result.error || "Error al crear la venta");
+        toast.error(result.error || "Error al crear la orden");
       }
     } catch (error) {
-      console.error("Error al crear la venta:", error);
+      console.error("Error al crear la orden:", error);
     } finally {
       setIsLoading(false);
     }
@@ -138,11 +138,11 @@ export const CreateSaleForm = ({
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">Nueva venta</Button>
+        <Button variant="outline">Nueva orden</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-6xl">
         <DialogHeader>
-          <DialogTitle>Nueva venta</DialogTitle>
+          <DialogTitle>Nueva orden</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -163,12 +163,13 @@ export const CreateSaleForm = ({
                   >
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecciona un tipo de venta" />
+                        <SelectValue placeholder="Selecciona un tipo de orden" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value={"Contado"}>Contado</SelectItem>
-                      <SelectItem value={"Crédito"}>Crédito</SelectItem>
+                      <SelectItem value={"En línea"}>En línea</SelectItem>
+                      <SelectItem value={"En local"}>En local</SelectItem>
+                      <SelectItem value={"Por encargo"}>Por encargo</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -396,7 +397,7 @@ export const CreateSaleForm = ({
 
         <DialogFooter className="sm:justify-start">
           <Button type="submit" disabled={isLoading} form="form">
-            {isLoading ? "Generando venta..." : "Generar venta"}
+            {isLoading ? "Generando orden..." : "Generar orden"}
           </Button>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

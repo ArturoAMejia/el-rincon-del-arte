@@ -4,7 +4,7 @@ import { getCurrenciesAction } from "@/modules/admin/currency";
 import { getFormOfPaymentsAction } from "@/modules/admin/form-of-payment";
 import { getOrdersAction } from "@/modules/admin/order/actions";
 import { orderColumns } from "@/modules/admin/order/components/data-table/columns";
-import { CreateSaleForm } from "@/modules/admin/order/components/form/create-sale-form";
+import { CreateOrderForm } from "@/modules/admin/order/components/form/create-order-form";
 import { DataTable, DataTableSkeleton } from "@/shared/components";
 import { Suspense } from "react";
 
@@ -19,10 +19,10 @@ const OrderPage = async () => {
     <section>
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Ordenes</h1>
-          <p>Administra las ordenes de obras de arte de la plataforma.</p>
+          <h1 className="text-2xl font-bold">Órdenes</h1>
+          <p>Administra las órdenes de obras de arte de la plataforma.</p>
         </div>
-        <CreateSaleForm
+        <CreateOrderForm
           artworks={artworks?.data || []}
           clients={clients?.data || []}
           currencies={currencies?.data || []}

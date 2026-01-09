@@ -15,7 +15,6 @@ export const FormOfPaymentRowActions = ({ formOfPayment }: Props) => {
   return (
     <div className="flex items-center gap-2">
       <UpdateFormOfPaymentForm formOfPayment={formOfPayment} />
-      {/* <DeleteFormOfPayment id={Number(formOfPayment.id)} /> */}
     </div>
   );
 };

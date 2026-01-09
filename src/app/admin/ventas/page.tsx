@@ -1,19 +1,15 @@
-import { getArtworksAction } from "@/modules/admin";
-import { getClientsAction } from "@/modules/admin/client";
-import { getCurrenciesAction } from "@/modules/admin/currency";
-import { getFormOfPaymentsAction } from "@/modules/admin/form-of-payment";
-// import { getOrdersAction } from "@/modules/admin/order/actions";
-// import { salesColumns } from "@/modules/admin/order/components/data-table/columns";
-import { CreateSaleForm } from "@/modules/admin/order/components/form/create-sale-form";
-import { DataTableSkeleton } from "@/shared/components";
+import { getOrdersWithoutSaleAction } from "@/modules/admin/order/actions";
+import { getSalesAction } from "@/modules/admin/sale/actions";
+import { saleColumns } from "@/modules/admin/sale/components/data-table/columns";
+import { CreateSaleForm } from "@/modules/admin/sale/components/form/create-sale-form";
+import { DataTable, DataTableSkeleton } from "@/shared/components";
 import { Suspense } from "react";
 
 const VentasPage = async () => {
-  // const orders = await getOrderAction();
-  const artworks = await getArtworksAction();
-  const clients = await getClientsAction();
-  const currencies = await getCurrenciesAction();
-  const formOfPayments = await getFormOfPaymentsAction();
+  const [orders, sales] = await Promise.all([
+    getOrdersWithoutSaleAction(),
+    getSalesAction(),
+  ]);
 
   return (
     <section>
@@ -22,16 +18,11 @@ const VentasPage = async () => {
           <h1 className="text-2xl font-bold">Ventas</h1>
           <p>Administra las ventas de obras de arte de la plataforma.</p>
         </div>
-        <CreateSaleForm
-          artworks={artworks?.data || []}
-          clients={clients?.data || []}
-          currencies={currencies?.data || []}
-          formOfPayments={formOfPayments?.data || []}
-        />
+        <CreateSaleForm orders={orders?.data || []} />
       </div>
 
       <Suspense fallback={<DataTableSkeleton />}>
-        {/* <DataTable columns={salesColumns} data={sales?.data} /> */}
+        <DataTable columns={saleColumns} data={sales?.data || []} />
       </Suspense>
     </section>
   );

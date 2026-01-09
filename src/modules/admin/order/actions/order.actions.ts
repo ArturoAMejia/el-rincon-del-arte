@@ -2,7 +2,11 @@
 
 import { cacheTag, updateTag } from "next/cache";
 import { OrderEntity } from "../interfaces";
-import { getOrders, createOrderService } from "../services";
+import {
+  getOrders,
+  getOrdersWithoutSale,
+  createOrderService,
+} from "../services";
 import { CreateOrderDto } from "../dtos/order.dto";
 import { ArtworkEntity } from "../../artwork";
 
@@ -22,6 +26,39 @@ export async function getOrdersAction(): Promise<{
     };
   } catch (error) {
     console.error("Error fetching orders:", error);
+
+    if (error instanceof Error) {
+      return {
+        success: false,
+        data: [],
+        error: error.message,
+      };
+    }
+
+    return {
+      success: false,
+      data: [],
+      error: "An unexpected error occurred",
+    };
+  }
+}
+
+export async function getOrdersWithoutSaleAction(): Promise<{
+  success: boolean;
+  data: OrderEntity[];
+  error?: string;
+}> {
+  "use cache";
+  cacheTag("order");
+  try {
+    const orders = await getOrdersWithoutSale();
+
+    return {
+      success: true,
+      data: orders,
+    };
+  } catch (error) {
+    console.error("Error fetching unsold orders:", error);
 
     if (error instanceof Error) {
       return {
