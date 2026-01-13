@@ -36,27 +36,26 @@ model type_art {
 }
 
 model artwork {
-  id             Int              @id @default(autoincrement())
-  state_id       Int              @default(1)
-  state          state            @relation(fields: [state_id], references: [id])
-  name           String
-  description    String
-  dimension      String
-  price          Float
-  artist         artist           @relation(fields: [artist_id], references: [id])
-  artist_id      Int
-  collection_id  Int
-  collection     collection       @relation(fields: [collection_id], references: [id])
-  category_id    Int
-  category       category         @relation(fields: [category_id], references: [id])
-  type_art_id    Int
-  type_art       type_art         @relation(fields: [type_art_id], references: [id])
-  size_id        Int
-  size           size             @relation(fields: [size_id], references: [id])
-  created_at     DateTime         @default(now())
-  artwork_image  artwork_image[]
-  voucher_detail voucher_detail[]
-  sale_detail    sale_detail[]
+  id            Int             @id @default(autoincrement())
+  state_id      Int             @default(1)
+  state         state           @relation(fields: [state_id], references: [id])
+  name          String
+  description   String
+  dimension     String
+  price         Float
+  artist        artist          @relation(fields: [artist_id], references: [id])
+  artist_id     Int
+  collection_id Int
+  collection    collection      @relation(fields: [collection_id], references: [id])
+  category_id   Int
+  category      category        @relation(fields: [category_id], references: [id])
+  type_art_id   Int
+  type_art      type_art        @relation(fields: [type_art_id], references: [id])
+  size_id       Int
+  size          size            @relation(fields: [size_id], references: [id])
+  created_at    DateTime        @default(now())
+  artwork_image artwork_image[]
+  order_detail  order_detail[]
 }
 
 model artwork_image {

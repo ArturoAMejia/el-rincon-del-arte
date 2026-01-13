@@ -7,29 +7,29 @@ model state {
   size       size[]
   artwork    artwork[]
   voucher    voucher[]
-  sale       sale[]
+  order      order[]
   role       role[]
   collection collection[]
   artist     artist[]
   client     client[]
   User       User[]
   type_art   type_art[]
+  sale       sale[]
 }
 
 model voucher {
-  id                 Int              @id @default(autoincrement())
-  state_id           Int              @default(1)
-  state              state            @relation(fields: [state_id], references: [id])
+  id                 Int             @id @default(autoincrement())
+  state_id           Int             @default(1)
+  state              state           @relation(fields: [state_id], references: [id])
   client_id          Int
-  client             client           @relation(fields: [client_id], references: [id])
+  client             client          @relation(fields: [client_id], references: [id])
   currency_id        Int
-  currency           currency         @relation(fields: [currency_id], references: [id])
+  currency           currency        @relation(fields: [currency_id], references: [id])
   form_of_payment_id Int
-  form_of_payment    form_of_payment  @relation(fields: [form_of_payment_id], references: [id])
-  numeration         String           @unique @default(uuid())
-  serie              String           @unique @default(uuid())
-  created_at         DateTime         @default(now())
-  voucher_detail     voucher_detail[]
+  form_of_payment    form_of_payment @relation(fields: [form_of_payment_id], references: [id])
+  numeration         String          @unique @default(uuid())
+  serie              String          @unique @default(uuid())
+  created_at         DateTime        @default(now())
   sale               sale[]
 }
 
@@ -38,7 +38,7 @@ model currency {
   name       String
   created_at DateTime  @default(now())
   voucher    voucher[]
-  sale       sale[]
+  order      order[]
 }
 
 model form_of_payment {
@@ -46,5 +46,5 @@ model form_of_payment {
   name       String
   created_at DateTime  @default(now())
   voucher    voucher[]
-  sale       sale[]
+  order      order[]
 }
