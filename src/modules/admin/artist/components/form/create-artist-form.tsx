@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  UpdateClientDto,
-  updateClientDto,
-} from "@/modules/admin/client/dto/client.dto";
-import { Edit } from "lucide-react";
+  createArtistDto,
+  CreateArtistDto,
+} from "@/modules/admin/artist/dto/artist.dto";
+import { createArtistAction } from "@/modules/admin/artist/actions/artist.actions";
 import { Button } from "@/shared/components/button";
 import { Input } from "@/shared/components/input";
 import {
@@ -19,63 +19,51 @@ import {
   FormMessage,
 } from "@/shared/components/form/form";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components";
-import {
   Dialog,
-  DialogTrigger,
+  DialogClose,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
-  DialogClose,
+  DialogTrigger,
 } from "@/shared/components/dialog/dialog";
-import { updateClientAction } from "@/modules/admin/client/actions/client.actions";
-import { ClientEntity } from "@/modules/admin/client/interfaces";
 import { toast } from "sonner";
+import { Textarea } from "@/shared/components/textarea";
 
-export const UpdateClientForm = ({ client }: { client: ClientEntity }) => {
+export const CreateArtistForm = () => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<UpdateClientDto>({
-    resolver: zodResolver(updateClientDto),
+  const form = useForm<CreateArtistDto>({
+    resolver: zodResolver(createArtistDto),
     defaultValues: {
-      id: client.id,
-      person_id: client.person_id,
       person: {
-        id: client.person_id,
-        name: client.name ?? "",
-        last_name_business_name:
-          client.name?.split(" ").slice(1).join(" ") ?? "",
-        id_ruc: client.id_ruc ?? "",
-        phone_number: client.phone_number ?? "",
-        email: client.email ?? "",
-        birthday: client.birthday ?? "",
-        address: client.address ?? "",
+        name: "",
+        last_name_business_name: "",
+        id_ruc: "",
+        phone_number: "",
+        email: "",
+        birthday: "",
+        address: "",
       },
-      client_type: client.client_type,
-      gender: client.gender,
+      bio: "",
+      style: "",
     },
   });
 
-  const handleSubmit = async (formData: UpdateClientDto) => {
+  const handleSubmit = async (formData: CreateArtistDto) => {
     setIsLoading(true);
     try {
-      const result = await updateClientAction(formData.id, formData);
+      const result = await createArtistAction(formData);
       if (result.success) {
-        toast.success("Cliente actualizado");
+        toast.success("Artista creado");
         setOpen(false);
         form.reset();
       } else {
-        toast.error(result.error || "Error al actualizar el cliente");
+        toast.error(result.error || "Error al crear el artista");
       }
     } catch (error) {
-      console.error("Error updating client:", error);
+      console.error("Error creating artist:", error);
     } finally {
       setIsLoading(false);
     }
@@ -84,26 +72,25 @@ export const UpdateClientForm = ({ client }: { client: ClientEntity }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          <Edit />
-        </Button>
+        <Button variant="outline">Agregar artista</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Editar cliente</DialogTitle>
+          <DialogTitle>Nuevo artista</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            id={`form-client-${client.id}`}
+            id="form-artist"
             className="space-y-4"
           >
+            {/* Person Fields */}
             <FormField
               control={form.control}
               name="person.name"
               render={({ field }) => (
-                <FormItem className="my-2">
+                <FormItem>
                   <FormLabel>Nombre</FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -224,29 +211,15 @@ export const UpdateClientForm = ({ client }: { client: ClientEntity }) => {
               )}
             />
 
+            {/* Artist Fields */}
             <FormField
               control={form.control}
-              name="client_type"
+              name="style"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tipo</FormLabel>
+                  <FormLabel>Estilo</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={(v) => field.onChange(v)}
-                      value={field.value}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Seleccionar" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="persona_natural">
-                          Persona natural
-                        </SelectItem>
-                        <SelectItem value="persona_juridica">
-                          Persona jurídica
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Input {...field} value={field.value ?? ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -255,26 +228,16 @@ export const UpdateClientForm = ({ client }: { client: ClientEntity }) => {
 
             <FormField
               control={form.control}
-              name="gender"
+              name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Género</FormLabel>
+                  <FormLabel>Biografía</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={(v) => field.onChange(v)}
-                      value={field.value}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Seleccionar" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="masculino">Masculino</SelectItem>
-                        <SelectItem value="femenino">Femenino</SelectItem>
-                        <SelectItem value="prefiero_no_decirlo">
-                          Prefiero no decirlo
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Textarea
+                      {...field}
+                      value={field.value ?? ""}
+                      className="resize-none"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -284,11 +247,7 @@ export const UpdateClientForm = ({ client }: { client: ClientEntity }) => {
         </Form>
 
         <DialogFooter>
-          <Button
-            type="submit"
-            form={`form-client-${client.id}`}
-            disabled={isLoading}
-          >
+          <Button type="submit" form="form-artist" disabled={isLoading}>
             {isLoading ? "Guardando..." : "Guardar"}
           </Button>
           <DialogClose asChild>
