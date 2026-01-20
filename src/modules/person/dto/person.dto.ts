@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-// phone: all
-// ow optional leading + and digits only
-const phoneRegex = /^\+?\d*$/;
+// phone: allow common separators (spaces, dashes, parens) but validate
+// against digits with an optional leading + after cleaning.
+const phoneRegex = /^\+?\d+$/;
 
 export const createPersonDto = z.object({
   name: z.string().min(1, "El nombre es requerido"),
@@ -14,10 +14,14 @@ export const createPersonDto = z.object({
     .string()
     .optional()
     .nullable()
-    .refine((val) => {
-      if (val === null || val === undefined || val === "") return true;
-      return phoneRegex.test(val);
-    }, { message: "Teléfono inválido" }),
+    .refine(
+      (val) => {
+        if (val === null || val === undefined || val === "") return true;
+        const cleaned = String(val).replace(/[^\d+]/g, "");
+        return phoneRegex.test(cleaned);
+      },
+      { message: "Teléfono inválido" }
+    ),
   email: z.string().email("Email inválido"),
   birthday: z.string().optional().nullable(),
   address: z.string().optional().nullable(),

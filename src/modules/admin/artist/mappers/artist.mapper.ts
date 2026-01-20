@@ -1,4 +1,4 @@
-import { artist, person } from "@/generated/prisma";
+import { artist, person } from "@/generated/prisma/client";
 
 export class ArtistMapper {
   static toDTO(

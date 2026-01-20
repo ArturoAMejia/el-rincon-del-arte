@@ -33,11 +33,11 @@ const main = async (): Promise<void> => {
     await prisma.type_art.createMany({ data: type_art });
     await prisma.artwork.createMany({ data: artwork });
     // await prisma.artwork_image.createMany({ data: artwork_images })
-    await prisma.module.createMany({ data: modules });
-    await prisma.sub_module.createMany({ data: sub_modules });
-    await prisma.role.createMany({ data: roles });
-    await prisma.module_role.createMany({ data: modules_roles });
-    await prisma.sub_module_role.createMany({ data: sub_modules_roles });
+    // await prisma.module.createMany({ data: modules });
+    // await prisma.sub_module.createMany({ data: sub_modules });
+    // await prisma.role.createMany({ data: roles });
+    // await prisma.module_role.createMany({ data: modules_roles });
+    // await prisma.sub_module_role.createMany({ data: sub_modules_roles });
     // await prisma.user.createMany({ data: users })
     await prisma.currency.createMany({ data: currency });
     await prisma.form_of_payment.createMany({ data: form_of_payment });

@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { Search } from "lucide-react"
-import { Input } from "@/shared/components/input"
-import { Badge } from "../../badge/badge"
+import { Search } from "lucide-react";
+import { Input } from "@/shared/components/input";
+import { Badge } from "../../badge/badge";
 
 interface DataTableHeaderProps {
-  searchQuery: string
-  onSearchChange: (query: string) => void
-  searchableColumns: string[]
-  selectedCount: number
-  totalCount: number
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+  searchableColumns: string[];
+  selectedCount: number;
+  totalCount: number;
 }
 
 export function DataTableHeader({
@@ -41,5 +41,5 @@ export function DataTableHeader({
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -8,7 +8,6 @@ model state {
   artwork    artwork[]
   voucher    voucher[]
   order      order[]
-  role       role[]
   collection collection[]
   artist     artist[]
   client     client[]
