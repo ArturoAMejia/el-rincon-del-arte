@@ -78,8 +78,6 @@ export const usersColumns: ColumnDef<UserEntity>[] = [
         2: "Inactivo",
         3: "Pendiente",
         4: "Borrado",
-        5: "Vendido",
-        6: "Reservado",
       };
       return (
         <Badge className={getStatusColor(state as number)}>

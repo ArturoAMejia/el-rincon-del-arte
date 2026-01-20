@@ -21,8 +21,8 @@ export const DeactivateUser = ({ id }: { id: string }) => {
     try {
       const res = await deactivateUserAction(id);
       if (res.success) toast.success("Usuario desactivado");
-      else toast.error(res.error || "Error al desactivar el usuario");
     } catch (error) {
+      toast.error("Ocurrió un error inesperadoal desactivar el usuario");
       console.error(error);
     }
   };

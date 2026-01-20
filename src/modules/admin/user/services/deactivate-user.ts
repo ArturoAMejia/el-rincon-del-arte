@@ -26,6 +26,8 @@ export const deactivateUserService = async (id: string): Promise<void> => {
     });
   } catch (error) {
     console.error("Error deactivating user:", error);
-    throw new Error(String(error));
+    throw new Error(
+      `Error al desactivar el usuario: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 };

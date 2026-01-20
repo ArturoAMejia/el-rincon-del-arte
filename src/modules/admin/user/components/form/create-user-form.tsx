@@ -51,7 +51,6 @@ export const CreateUserForm = () => {
   });
 
   const handleSubmit = async (formData: CreateUserDto) => {
-    console.log("test");
     setIsLoading(true);
     try {
       const result = await createUserAction(formData);
@@ -81,9 +80,7 @@ export const CreateUserForm = () => {
 
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(handleSubmit, (error) => {
-              console.log(error);
-            })}
+            onSubmit={form.handleSubmit(handleSubmit)}
             id="form-user"
             className="space-y-4"
           >

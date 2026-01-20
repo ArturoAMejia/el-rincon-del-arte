@@ -7,8 +7,6 @@ import { usersColumns } from "@/modules/admin/user/components/data-table/columns
 export default async function Page() {
   const allUsers = await getUsersAction();
 
-  // console.log(allUsers.data);
-
   return (
     <section>
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">

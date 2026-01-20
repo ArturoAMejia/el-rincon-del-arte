@@ -13,8 +13,6 @@ export const getUsers = async (): Promise<UserEntity[]> => {
     });
     if (!users) return [];
 
-    console.log(users);
-
     return users.map((u) => UserMapper.toDTO(u));
   } catch (error) {
     console.error(`Error al obtener los usuarios`, error);

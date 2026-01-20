@@ -1,11 +1,14 @@
 import { z } from "zod";
-import { createPersonDto, updatePersonDto } from "@/modules/person/dto/person.dto";
+import {
+  createPersonDto,
+  updatePersonDto,
+} from "@/modules/person/dto/person.dto";
 
 export const createUserDto = z.object({
   person: createPersonDto,
   name: z.string().min(1, "El nombre es requerido"),
   email: z.string().email("El email no es válido"),
-  roleId: z.number().optional(),
+  role: z.string(),
 });
 
 export type CreateUserDto = z.infer<typeof createUserDto>;
@@ -16,7 +19,6 @@ export const updateUserDto = z.object({
   person: updatePersonDto,
   name: z.string().min(1, "El nombre es requerido"),
   email: z.string().email("El email no es válido"),
-  roleId: z.number().optional(),
 });
 
 export type UpdateUserDto = z.infer<typeof updateUserDto>;

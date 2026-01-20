@@ -62,10 +62,11 @@ export const UpdateUserForm = ({ user }: { user: UserEntity }) => {
       if (result.success) {
         toast.success("Usuario actualizado");
         setOpen(false);
-      } else {
-        toast.error(result.error || "Error al actualizar usuario");
       }
     } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Error al actualizar usuario"
+      );
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -86,9 +87,7 @@ export const UpdateUserForm = ({ user }: { user: UserEntity }) => {
 
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(handleSubmit, (error) => {
-              console.log(error);
-            })}
+            onSubmit={form.handleSubmit(handleSubmit)}
             id="form-update-user"
             className="space-y-4"
           >
@@ -172,7 +171,6 @@ export const UpdateUserForm = ({ user }: { user: UserEntity }) => {
               control={form.control}
               name="person.phone_number"
               render={({ field }) => {
-                const raw: string = field.value ?? "";
                 const formatDisplay = (v: string) => {
                   if (!v) return "";
                   const hasPlus = v.startsWith("+");

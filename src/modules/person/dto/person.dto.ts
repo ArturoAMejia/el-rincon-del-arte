@@ -14,11 +14,14 @@ export const createPersonDto = z.object({
     .string()
     .optional()
     .nullable()
-    .refine((val) => {
-      if (val === null || val === undefined || val === "") return true;
-      const cleaned = String(val).replace(/[^\d+]/g, "");
-      return phoneRegex.test(cleaned);
-    }, { message: "Teléfono inválido" }),
+    .refine(
+      (val) => {
+        if (val === null || val === undefined || val === "") return true;
+        const cleaned = String(val).replace(/[^\d+]/g, "");
+        return phoneRegex.test(cleaned);
+      },
+      { message: "Teléfono inválido" }
+    ),
   email: z.string().email("Email inválido"),
   birthday: z.string().optional().nullable(),
   address: z.string().optional().nullable(),
