@@ -31,7 +31,7 @@ export const createArtistAction = async (
 
 export const getArtistsAction = async (): Promise<{
   success: boolean;
-  data?: ArtistEntity[];
+  data: ArtistEntity[];
   error?: string;
 }> => {
   "use cache";
@@ -49,12 +49,14 @@ export const getArtistsAction = async (): Promise<{
 
     if (error instanceof Error) {
       return {
+        data: [],
         success: false,
         error: error.message,
       };
     }
 
     return {
+      data: [],
       success: false,
       error: "An unexpected error occurred",
     };

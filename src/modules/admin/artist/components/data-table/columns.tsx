@@ -1,10 +1,12 @@
-'use client'
+"use client";
+
 import { DataTableColumnHeader } from "@/shared/components/data-table/column";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistRowActions } from "./row-actions/artist-row-actions";
 import { getStatusColor } from "@/utils/get-status-color";
 import { Badge } from "@/shared/components/badge/badge";
+import { statusLabels } from "@/utils/status-app";
 
 export const artistsColumns: ColumnDef<ArtistEntity>[] = [
   { accessorKey: "id", header: "ID" },
@@ -45,17 +47,10 @@ export const artistsColumns: ColumnDef<ArtistEntity>[] = [
     ),
     cell: ({ row }) => {
       const state = row.original.state_id;
-      const labels: Record<number, string> = {
-        1: "Activo",
-        2: "Inactivo",
-        3: "Pendiente",
-        4: "Borrado",
-        5: "Vendido",
-        6: "Reservado",
-      };
+
       return (
         <Badge className={getStatusColor(state)}>
-          {labels[state] ?? "Desconocido"}
+          {statusLabels[state] ?? "Desconocido"}
         </Badge>
       );
     },

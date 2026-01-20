@@ -11,6 +11,9 @@ export const getArtistById = async (id: number) => {
     return ArtistMapper.toDTO(artist);
   } catch (error) {
     console.error("Error fetching artist by id:", error);
-    throw new Error(String(error));
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`Error getting artist: ${String(error)}`);
   }
 };

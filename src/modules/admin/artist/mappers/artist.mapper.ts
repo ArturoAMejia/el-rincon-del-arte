@@ -18,8 +18,9 @@ export class ArtistMapper {
       phone_number: entity.person ? entity.person.phone_number : null,
       email: entity.person ? entity.person.email : null,
       birthday: entity.person
-        ? entity.person.birthday
-          ? entity.person.birthday.toISOString().split("T")[0] // Format YYYY-MM-DD
+        ? entity.person.birthday instanceof Date &&
+          !isNaN(entity.person.birthday.getTime())
+          ? entity.person.birthday.toLocaleDateString("en-CA") // Format YYYY-MM-DD
           : null
         : null,
       address: entity.person ? entity.person.address : null,

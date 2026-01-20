@@ -44,6 +44,9 @@ export const updateArtistService = async (
     return ArtistMapper.toDTO(artistWithPerson);
   } catch (error) {
     console.error("Error updating artist:", error);
-    throw new Error(String(error));
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`Error updating artist: ${String(error)}`);
   }
 };

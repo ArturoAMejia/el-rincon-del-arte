@@ -7,6 +7,10 @@ import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistMapper } from "@/modules/admin/artist/mappers";
 import { createPersonService } from "@/modules/person/services/create-person";
 
+enum ArtistState {
+  Active = 1,
+}
+
 export const createArtistService = async (
   artist: CreateArtistDto
 ): Promise<ArtistEntity> => {
@@ -21,7 +25,7 @@ export const createArtistService = async (
         bio: newArtist.bio ?? "",
         style: newArtist.style ?? "",
         image: "", // Required by DB
-        state_id: 1, // Active by default
+        state_id: ArtistState.Active, // Active by default
       },
     });
 
@@ -34,6 +38,9 @@ export const createArtistService = async (
     return ArtistMapper.toDTO(artistWithPerson);
   } catch (error) {
     console.error("Error creating artist:", error);
-    throw new Error(String(error));
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`Error creating artist: ${String(error)}`);
   }
 };
