@@ -7,5 +7,7 @@ export interface ArtistEntity {
   style: string | null;
   phone_number: string | null;
   email: string | null;
+  birthday: string | null;
+  address: string | null;
   state_id: number;
 }

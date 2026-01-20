@@ -5,6 +5,7 @@ import { ClientEntity } from "@/modules/admin/client/interfaces";
 import { ClientRowActions } from "../row-actions/client-row-actions";
 import { getStatusColor } from "@/utils/get-status-color";
 import { Badge } from "@/shared/components/badge/badge";
+import { statusLabels } from "@/utils/status-app";
 
 export const clientsColumns: ColumnDef<ClientEntity>[] = [
   { accessorKey: "id", header: "ID" },
@@ -51,17 +52,10 @@ export const clientsColumns: ColumnDef<ClientEntity>[] = [
     ),
     cell: ({ row }) => {
       const state = row.original.state_id;
-      const labels: Record<number, string> = {
-        1: "Activo",
-        2: "Inactivo",
-        3: "Pendiente",
-        4: "Borrado",
-        5: "Vendido",
-        6: "Reservado",
-      };
+
       return (
         <Badge className={getStatusColor(state)}>
-          {labels[state] ?? "Desconocido"}
+          {statusLabels[state] ?? "Desconocido"}
         </Badge>
       );
     },

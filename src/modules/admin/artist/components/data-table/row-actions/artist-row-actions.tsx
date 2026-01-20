@@ -1,0 +1,29 @@
+"use client";
+
+import { ArtistEntity } from "@/modules/admin/artist/interfaces";
+import {
+  DeactivateArtist,
+  ReactivateArtist,
+  UpdateArtistForm,
+} from "../../form";
+
+interface Props {
+  artist?: ArtistEntity;
+}
+
+export const ArtistRowActions = ({ artist }: Props) => {
+  if (!artist) return null;
+  const ARTIST_STATE = { ACTIVE: 1, INACTIVE: 2 };
+
+  return (
+    <div className="flex items-center gap-2">
+      <UpdateArtistForm artist={artist} />
+      {artist.state_id === ARTIST_STATE.ACTIVE && (
+        <DeactivateArtist id={artist.id} />
+      )}
+      {artist.state_id === ARTIST_STATE.INACTIVE && (
+        <ReactivateArtist id={artist.id} />
+      )}
+    </div>
+  );
+};
