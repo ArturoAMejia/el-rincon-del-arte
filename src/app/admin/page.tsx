@@ -1,21 +1,39 @@
-import { AdminBarChart } from "@/modules/admin/components/charts"
+import { OverviewStats } from "@/modules/admin/dashboard/overview-stats";
+import { RecentActivityCharts } from "@/modules/admin/dashboard/recent-activity-charts";
+import { RecentSales } from "../../modules/admin/dashboard/recent-sales";
+import { getOverviewStats } from "@/modules/admin/dashboard/services/get-overview-stats";
+import { getRecentActivity } from "@/modules/admin/dashboard/services/get-recent-activity";
+import { getRecentSales } from "@/modules/admin/dashboard/services/get-recent-sales";
 
-const AdminPage = () => {
+const AdminPage = async () => {
+  const [overviewStats, recentActivity, recentSales] = await Promise.all([
+    getOverviewStats(),
+    getRecentActivity(),
+    getRecentSales(),
+  ]);
+
   return (
     <section className="p-4 w-full">
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-md bg-black/50">
-            <AdminBarChart />
-          </div>
-
-          <div className="aspect-video rounded-md bg-black/50" />
-          <div className="aspect-video rounded-md bg-black/50" />
-        </div>
-        <div className="min-h-[100vh] flex-1 rounded-md bg-black/50 md:min-h-min" />
+      <div className="mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold ">
+          El Rincón del Arte Panel Administrativo
+        </h1>
+        <p className="text-sm  mt-1">
+          Resumen de estadísticas y actividades recientes del sitio.
+        </p>
+      </div>
+      <OverviewStats data={overviewStats} />
+      <div className="mt-6">
+        <RecentActivityCharts
+          ordersSalesData={recentActivity.ordersSalesData}
+          registrationsData={recentActivity.registrationsData}
+        />
+      </div>
+      <div className="mt-6">
+        <RecentSales data={recentSales} />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default AdminPage
+export default AdminPage;

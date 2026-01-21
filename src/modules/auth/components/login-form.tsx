@@ -56,7 +56,8 @@ export function LoginForm() {
         email: values.email,
         password: values.password,
         fetchOptions: {
-          onSuccess: () => {
+          onSuccess: (ctx) => {
+            console.log(ctx);
             toast.success("Logged in successfully!");
             router.push("/");
             router.refresh();
@@ -67,6 +68,7 @@ export function LoginForm() {
         },
       });
     } catch (error) {
+      console.error(error);
       toast.error("An unexpected error occurred");
     } finally {
       setIsLoading(false);
@@ -82,6 +84,7 @@ export function LoginForm() {
       });
     } catch (error) {
       toast.error("Failed to sign in with Google");
+      console.error(error);
       setIsLoading(false);
     }
   }
