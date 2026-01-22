@@ -67,6 +67,7 @@ export function LoginForm() {
         },
       });
     } catch (error) {
+      console.error(error);
       toast.error("An unexpected error occurred");
     } finally {
       setIsLoading(false);
@@ -82,6 +83,7 @@ export function LoginForm() {
       });
     } catch (error) {
       toast.error("Failed to sign in with Google");
+      console.error(error);
       setIsLoading(false);
     }
   }
