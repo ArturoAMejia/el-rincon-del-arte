@@ -6,6 +6,7 @@ import {
 } from "@/modules/admin/artist/dto/artist.dto";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistMapper } from "@/modules/admin/artist/mappers";
+import { ARTIST_CLIENT_ROLE } from "@/modules/admin/artist/constants";
 import { generatePassword } from "@/modules/auth/services/generate-password";
 import { sendUserCredentialsEmail } from "@/modules/email/services/send-email";
 import { createPersonService } from "@/modules/person/services/create-person";
@@ -20,8 +21,16 @@ export const createArtistService = async (
   try {
     const newArtist = createArtistDto.parse(artist);
     
-    const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
+    // Normalize email to ensure consistency across User and Person records
     const email = newArtist.person.email.trim().toLowerCase();
+    
+    // First create the person via the global service with normalized email
+    const createdPerson = await createPersonService({
+      ...newArtist.person,
+      email,
+    });
+
+    const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
 
     // Check if user exists BEFORE creating the person record to avoid data inconsistency
     const existingUser = await prisma.user.findUnique({
@@ -42,7 +51,7 @@ export const createArtistService = async (
         email,
         password,
         name: fullName,
-        role: "artist,client",
+        role: ARTIST_CLIENT_ROLE,
       },
     });
 
