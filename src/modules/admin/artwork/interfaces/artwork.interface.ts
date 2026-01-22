@@ -4,6 +4,7 @@ export interface ArtworkEntity {
   description: string;
   dimension: string;
   price: number;
+  state_id: number;
   artist: string | null;
   artist_id: number;
   collection_id: number;

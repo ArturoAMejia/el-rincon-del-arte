@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/shared/components/data-table/column";
-import { DataTable } from "@/shared/components";
+import { Badge, DataTable } from "@/shared/components";
 import { ArtworkEntity } from "@/modules/admin/artwork/interfaces";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { CategoryEntity } from "@/modules/admin/category/interfaces";
@@ -10,6 +10,8 @@ import { CollectionEntity } from "@/modules/admin/collection/interfaces";
 import { SizeEntity } from "@/modules/admin/size/interfaces";
 import { TypeArtEntity } from "@/modules/admin/type-art/interfaces";
 import { ArtworkRowActions } from "./row-actions/artwork-row-actions";
+import { statusLabels } from "@/utils/status-app";
+import { getStatusColor } from "@/utils/get-status-color";
 
 interface Props {
   data: ArtworkEntity[];
@@ -64,6 +66,21 @@ export const ArtworkDataTableClient = ({
     {
       accessorKey: "price",
       header: "Precio",
+    },
+    {
+      accessorKey: "state_id",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Estado" />
+      ),
+      cell: ({ row }) => {
+        const state = row.original.state_id;
+
+        return (
+          <Badge className={getStatusColor(state)}>
+            {statusLabels[state] ?? "Desconocido"}
+          </Badge>
+        );
+      },
     },
     {
       accessorKey: "actions",
