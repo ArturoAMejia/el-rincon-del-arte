@@ -20,11 +20,12 @@ export const createArtistService = async (
 ): Promise<ArtistEntity> => {
   try {
     const newArtist = createArtistDto.parse(artist);
-    
+
     // Normalize email once for consistent use
-    const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
+    const fullName =
+      `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
     const email = newArtist.person.email.trim().toLowerCase();
-    
+
     // First create the person via the global service with normalized email
     const createdPerson = await createPersonService({
       ...newArtist.person,
@@ -40,9 +41,6 @@ export const createArtistService = async (
       throw new Error("Ya existe un usuario con este email");
     }
 
-    // Now create the person via the global service
-    const createdPerson = await createPersonService(newArtist.person);
-
     const password = generatePassword();
 
     await auth.api.createUser({
@@ -50,7 +48,7 @@ export const createArtistService = async (
         email,
         password,
         name: fullName,
-        role: ARTIST_CLIENT_ROLE,
+        role: [...ARTIST_CLIENT_ROLE],
       },
     });
 

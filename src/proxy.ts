@@ -25,9 +25,14 @@ export default async function proxy(request: NextRequest) {
   }
 
   const role = data.user.role;
+  const roles = Array.isArray(role)
+    ? role
+    : typeof role === "string"
+      ? role.split(",").map((r) => r.trim())
+      : [];
 
   if (isAdminRoute) {
-    if (role.includes("admin") || role.includes("artist")) {
+    if (roles.includes("admin") || roles.includes("artist")) {
       return NextResponse.next();
     }
     // Redirect client to home

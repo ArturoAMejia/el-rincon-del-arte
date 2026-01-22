@@ -1,5 +1,5 @@
 /**
- * Default role assigned to artists when creating or updating their user accounts.
+ * Default roles assigned to artists when creating or updating their user accounts.
  * Combines artist and client permissions.
  */
-export const ARTIST_CLIENT_ROLE = "artist,client";
+export const ARTIST_CLIENT_ROLE = ["artist", "client"] as const;

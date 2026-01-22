@@ -51,7 +51,7 @@ export const updateArtistService = async (
         data: {
           name: fullName,
           email,
-          role: ARTIST_CLIENT_ROLE,
+          role: [...ARTIST_CLIENT_ROLE],
         },
       });
     }
