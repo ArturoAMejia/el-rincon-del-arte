@@ -6,6 +6,7 @@ import {
 } from "@/modules/admin/artist/dto/artist.dto";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistMapper } from "@/modules/admin/artist/mappers";
+import { ARTIST_CLIENT_ROLE } from "@/modules/admin/artist/constants";
 import { generatePassword } from "@/modules/auth/services/generate-password";
 import { sendUserCredentialsEmail } from "@/modules/email/services/send-email";
 import { createPersonService } from "@/modules/person/services/create-person";
@@ -19,12 +20,18 @@ export const createArtistService = async (
 ): Promise<ArtistEntity> => {
   try {
     const newArtist = createArtistDto.parse(artist);
-    // First create the person via the global service
-    const createdPerson = await createPersonService(newArtist.person);
-
+    
+    // Normalize email once for consistent use
     const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
     const email = newArtist.person.email.trim().toLowerCase();
+    
+    // First create the person via the global service with normalized email
+    const createdPerson = await createPersonService({
+      ...newArtist.person,
+      email,
+    });
 
+    // Check if user exists BEFORE creating the person record to avoid data inconsistency
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -33,6 +40,9 @@ export const createArtistService = async (
       throw new Error("Ya existe un usuario con este email");
     }
 
+    // Now create the person via the global service
+    const createdPerson = await createPersonService(newArtist.person);
+
     const password = generatePassword();
 
     await auth.api.createUser({
@@ -40,7 +50,7 @@ export const createArtistService = async (
         email,
         password,
         name: fullName,
-        role: "artist,client",
+        role: ARTIST_CLIENT_ROLE,
       },
     });
 
