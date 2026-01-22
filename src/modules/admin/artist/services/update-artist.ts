@@ -35,6 +35,24 @@ export const updateArtistService = async (
       },
     });
 
+    const fullName = `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
+    const email = parsed.person.email.trim().toLowerCase();
+
+    const linkedUser = await prisma.user.findFirst({
+      where: { personId: parsed.person_id },
+    });
+
+    if (linkedUser) {
+      await prisma.user.update({
+        where: { id: linkedUser.id },
+        data: {
+          name: fullName,
+          email,
+          role: "artist,client",
+        },
+      });
+    }
+
     // return with person
     const artistWithPerson = await prisma.artist.findUnique({
       where: { id: updated.id },
