@@ -11,9 +11,21 @@ export const updateClientService = async (
 ): Promise<ClientEntity> => {
   try {
     const parsed = updateClientDto.parse(client);
-    const fullName = `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
+    const fullName =
+      `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
     const email = parsed.person.email.trim().toLowerCase();
     // Update person first
+
+    const uniqueEmail = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (uniqueEmail) {
+      throw new Error("Ya existe un usuario con este email");
+    }
+
     await prisma.person.update({
       where: { id: parsed.person_id },
       data: {
