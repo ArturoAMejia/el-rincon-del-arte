@@ -18,6 +18,7 @@ export class ArtworkMapper {
       name: entity.name,
       description: entity.description,
       price: entity.price,
+      state_id: entity.state_id,
       artist_id: entity.artist_id,
       collection_id: entity.collection_id,
       category_id: entity.category_id,
