@@ -12,6 +12,11 @@ export const updateArtistService = async (
 ): Promise<ArtistEntity> => {
   try {
     const parsed = updateArtistDto.parse(artist);
+    
+    // Normalize email once for consistent use
+    const fullName = `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
+    const email = parsed.person.email.trim().toLowerCase();
+    
     // Update person first
     await prisma.person.update({
       where: { id: parsed.person_id },
@@ -20,7 +25,7 @@ export const updateArtistService = async (
         last_name_business_name: parsed.person.last_name_business_name,
         id_ruc: parsed.person.id_ruc,
         phone_number: parsed.person.phone_number ?? "",
-        email: parsed.person.email,
+        email,
         birthday: parsed.person.birthday
           ? new Date(parsed.person.birthday)
           : undefined,
@@ -35,9 +40,6 @@ export const updateArtistService = async (
         style: parsed.style ?? undefined,
       },
     });
-
-    const fullName = `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
-    const email = parsed.person.email.trim().toLowerCase();
 
     const linkedUser = await prisma.user.findFirst({
       where: { personId: parsed.person_id },

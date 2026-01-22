@@ -21,7 +21,8 @@ export const createArtistService = async (
   try {
     const newArtist = createArtistDto.parse(artist);
     
-    // Normalize email to ensure consistency across User and Person records
+    // Normalize email once for consistent use
+    const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
     const email = newArtist.person.email.trim().toLowerCase();
     
     // First create the person via the global service with normalized email
@@ -29,8 +30,6 @@ export const createArtistService = async (
       ...newArtist.person,
       email,
     });
-
-    const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
 
     // Check if user exists BEFORE creating the person record to avoid data inconsistency
     const existingUser = await prisma.user.findUnique({
