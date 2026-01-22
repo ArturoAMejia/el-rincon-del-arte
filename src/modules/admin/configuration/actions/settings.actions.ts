@@ -4,7 +4,10 @@ import { headers } from "next/headers";
 import { betterFetch } from "@better-fetch/fetch";
 import type { Session } from "better-auth/types";
 
+import { randomBytes, createHash, randomUUID } from "crypto";
+
 import { prisma } from "@/lib/prisma";
+import { sendEmailVerificationEmail } from "@/modules/email/services/send-email";
 
 type SessionPayload = {
   session: Session;
@@ -40,18 +43,21 @@ const getBaseUrl = async () => {
 const getSessionUser = async () => {
   const headersList = await headers();
   const cookie = headersList.get("cookie") ?? "";
-  const { data } = await betterFetch<SessionPayload>(
-    "/api/auth/get-session",
-    {
-      baseURL: await getBaseUrl(),
-      headers: { cookie },
-    }
-  );
+  const { data } = await betterFetch<SessionPayload>("/api/auth/get-session", {
+    baseURL: await getBaseUrl(),
+    headers: { cookie },
+  });
 
   return data?.user ?? null;
 };
 
+const normalizeEmail = (email: string) => email.trim().toLowerCase();
+
+const EMAIL_VERIFICATION_PREFIX = "email-verification:";
+const EMAIL_VERIFICATION_TTL_MS = 1000 * 60 * 60 * 24;
+
 export async function getProfileAction() {
+  
   try {
     const sessionUser = await getSessionUser();
     if (!sessionUser?.id) {
@@ -112,11 +118,20 @@ export async function updateProfileAction(payload: {
       return { success: false, error: "Usuario no encontrado" };
     }
 
+    const nextEmail = normalizeEmail(payload.email);
+    const currentEmail = normalizeEmail(user.email);
+
+    const emailChanged = currentEmail !== nextEmail;
+    const nextEmailVerified = emailChanged
+      ? false
+      : Boolean(user.emailVerified);
+
     await prisma.user.update({
       where: { id: user.id },
       data: {
         name: payload.name.trim(),
-        email: payload.email.trim(),
+        email: nextEmail,
+        emailVerified: nextEmailVerified,
       },
     });
 
@@ -128,8 +143,14 @@ export async function updateProfileAction(payload: {
           id_ruc: payload.idRuc.trim(),
           phone_number: payload.phone.trim(),
           address: payload.address.trim(),
-          email: payload.email.trim(),
+          email: nextEmail,
         },
+      });
+    }
+
+    if (emailChanged) {
+      await prisma.verification.deleteMany({
+        where: { identifier: `${EMAIL_VERIFICATION_PREFIX}${currentEmail}` },
       });
     }
 
@@ -138,8 +159,8 @@ export async function updateProfileAction(payload: {
       data: {
         id: user.id,
         name: payload.name.trim(),
-        email: payload.email.trim(),
-        emailVerified: Boolean(user.emailVerified),
+        email: nextEmail,
+        emailVerified: nextEmailVerified,
         personName: payload.personName.trim(),
         idRuc: payload.idRuc.trim(),
         phone: payload.phone.trim(),
@@ -152,22 +173,111 @@ export async function updateProfileAction(payload: {
   }
 }
 
-export async function confirmEmailAction() {
+export async function requestEmailVerificationAction() {
   try {
     const user = await getSessionUser();
     if (!user?.id) {
       return { success: false, error: "No autenticado" };
     }
 
-    const updated = await prisma.user.update({
-      where: { id: user.id },
-      data: { emailVerified: true },
+    const email = user.email ? normalizeEmail(user.email) : "";
+    if (!email) {
+      return { success: false, error: "Correo inválido" };
+    }
+
+    if (user.emailVerified) {
+      return { success: true, data: { alreadyVerified: true } };
+    }
+
+    const identifier = `${EMAIL_VERIFICATION_PREFIX}${email}`;
+    const token = randomBytes(32).toString("hex");
+    const tokenHash = createHash("sha256").update(token).digest("hex");
+    const expiresAt = new Date(Date.now() + EMAIL_VERIFICATION_TTL_MS);
+
+    await prisma.verification.deleteMany({
+      where: { identifier },
+    });
+
+    await prisma.verification.create({
+      data: {
+        id: randomUUID(),
+        identifier,
+        value: tokenHash,
+        expiresAt,
+      },
+    });
+
+    const baseUrl = await getBaseUrl();
+    const verifyUrl = `${baseUrl}/verify-email?token=${token}`;
+
+    await sendEmailVerificationEmail({
+      to: email,
+      name: user.name ?? "",
+      verifyUrl,
+    });
+
+    return { success: true, data: { sent: true } };
+  } catch (error) {
+    console.error("Error sending verification email:", error);
+    return { success: false, error: "Error al enviar correo de verificación" };
+  }
+}
+
+export async function verifyEmailToken(token: string) {
+  try {
+    if (!token) {
+      return { success: false, error: "Token inválido" };
+    }
+
+    const tokenHash = createHash("sha256").update(token).digest("hex");
+    const verification = await prisma.verification.findFirst({
+      where: {
+        value: tokenHash,
+        identifier: { startsWith: EMAIL_VERIFICATION_PREFIX },
+      },
+    });
+
+    if (!verification) {
+      return { success: false, error: "Token inválido" };
+    }
+
+    if (verification.expiresAt < new Date()) {
+      await prisma.verification.deleteMany({
+        where: { identifier: verification.identifier },
+      });
+      return { success: false, error: "El token expiró" };
+    }
+
+    const email = verification.identifier.replace(
+      EMAIL_VERIFICATION_PREFIX,
+      ""
+    );
+    const user = await prisma.user.findUnique({
+      where: { email },
       select: { id: true, emailVerified: true },
     });
 
-    return { success: true, data: updated };
+    if (!user) {
+      await prisma.verification.deleteMany({
+        where: { identifier: verification.identifier },
+      });
+      return { success: false, error: "Usuario no encontrado" };
+    }
+
+    if (!user.emailVerified) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { emailVerified: true },
+      });
+    }
+
+    await prisma.verification.deleteMany({
+      where: { identifier: verification.identifier },
+    });
+
+    return { success: true };
   } catch (error) {
-    console.error("Error confirming email:", error);
-    return { success: false, error: "Error al confirmar correo" };
+    console.error("Error verifying email:", error);
+    return { success: false, error: "Error al verificar correo" };
   }
 }

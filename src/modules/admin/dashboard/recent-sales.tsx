@@ -36,8 +36,8 @@ export function RecentSales({ data }: { data: RecentSalesData }) {
       <CardHeader>
         <CardTitle>Ventas recientes</CardTitle>
         <CardDescription>
-          Has realizado {compactFormatter.format(data.monthSalesCount)}
-          mes.
+          Has realizado {compactFormatter.format(data.monthSalesCount)} ventas
+          en este mes.
         </CardDescription>
       </CardHeader>
       <CardContent>

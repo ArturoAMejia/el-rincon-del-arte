@@ -56,8 +56,7 @@ export function LoginForm() {
         email: values.email,
         password: values.password,
         fetchOptions: {
-          onSuccess: (ctx) => {
-            console.log(ctx);
+          onSuccess: () => {
             toast.success("Logged in successfully!");
             router.push("/");
             router.refresh();

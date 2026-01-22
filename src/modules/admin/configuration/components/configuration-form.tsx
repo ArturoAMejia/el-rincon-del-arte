@@ -29,7 +29,7 @@ import {
 } from "@/shared/components";
 
 import {
-  confirmEmailAction,
+  requestEmailVerificationAction,
   updateProfileAction,
 } from "@/modules/admin/configuration/actions/settings.actions";
 
@@ -111,7 +111,6 @@ export function ConfigurationForm({
 
     if (storedFontSize) setFontSize(storedFontSize);
     if (storedFontFamily) setFontFamily(storedFontFamily);
-
   }, []);
 
   useEffect(() => {
@@ -147,16 +146,19 @@ export function ConfigurationForm({
   const handleConfirmEmail = async () => {
     setIsConfirming(true);
     try {
-      const result = await confirmEmailAction();
+      const result = await requestEmailVerificationAction();
       if (result.success) {
-        setUser((prev) => (prev ? { ...prev, emailVerified: true } : prev));
-        toast.success("Correo confirmado");
+        if (result.data?.alreadyVerified) {
+          toast.success("El correo ya está confirmado");
+        } else {
+          toast.success("Correo de verificación enviado");
+        }
       } else {
-        toast.error(result.error || "Error al confirmar");
+        toast.error(result.error || "Error al enviar verificación");
       }
     } catch (error) {
       console.error(error);
-      toast.error("Error al confirmar");
+      toast.error("Error al enviar verificación");
     } finally {
       setIsConfirming(false);
     }
@@ -312,8 +314,8 @@ export function ConfigurationForm({
             {user?.emailVerified
               ? "Correo confirmado"
               : isConfirming
-                ? "Confirmando..."
-                : "Confirmar correo"}
+                ? "Enviando..."
+                : "Enviar verificación"}
           </Button>
         </CardContent>
       </Card>

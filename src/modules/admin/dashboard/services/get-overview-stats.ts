@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/prisma/db";
+import { prisma } from "@/lib/prisma";
 
 export type OverviewStatsData = {
   usersTotal: number;

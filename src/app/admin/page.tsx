@@ -1,8 +1,10 @@
 import { OverviewStats } from "@/modules/admin/dashboard/overview-stats";
 import { RecentActivityCharts } from "@/modules/admin/dashboard/recent-activity-charts";
-import { RecentSales } from "../../modules/admin/dashboard/recent-sales";
-import { getOverviewStats } from "@/modules/admin/dashboard/services/get-overview-stats";
-import { getRecentActivity } from "@/modules/admin/dashboard/services/get-recent-activity";
+import { RecentSales } from "@/modules/admin/dashboard/recent-sales";
+import {
+  getOverviewStats,
+  getRecentActivity,
+} from "@/modules/admin/dashboard/services";
 import { getRecentSales } from "@/modules/admin/dashboard/services/get-recent-sales";
 
 const AdminPage = async () => {
