@@ -11,6 +11,8 @@ export const updateClientService = async (
 ): Promise<ClientEntity> => {
   try {
     const parsed = updateClientDto.parse(client);
+    const fullName = `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
+    const email = parsed.person.email.trim().toLowerCase();
     // Update person first
     await prisma.person.update({
       where: { id: parsed.person_id },
@@ -19,7 +21,7 @@ export const updateClientService = async (
         last_name_business_name: parsed.person.last_name_business_name,
         id_ruc: parsed.person.id_ruc,
         phone_number: parsed.person.phone_number ?? "",
-        email: parsed.person.email,
+        email,
         birthday: parsed.person.birthday
           ? new Date(parsed.person.birthday)
           : undefined,
@@ -34,6 +36,21 @@ export const updateClientService = async (
         gender: parsed.gender,
       },
     });
+
+    const linkedUser = await prisma.user.findFirst({
+      where: { personId: parsed.person_id },
+    });
+
+    if (linkedUser) {
+      await prisma.user.update({
+        where: { id: linkedUser.id },
+        data: {
+          name: fullName,
+          email,
+          role: "client",
+        },
+      });
+    }
 
     // return with person
     const clientWithPerson = await prisma.client.findUnique({

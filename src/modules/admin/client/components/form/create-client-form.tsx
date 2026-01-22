@@ -13,6 +13,7 @@ import { Input } from "@/shared/components/input";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -184,6 +185,10 @@ export const CreateClientForm = () => {
                   <FormControl>
                     <Input type="email" {...field} />
                   </FormControl>
+                  <FormDescription>
+                    Se creará un usuario y se enviarán las credenciales a este
+                    correo.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

@@ -13,6 +13,7 @@ import { Input } from "@/shared/components/input";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -191,6 +192,9 @@ export const UpdateClientForm = ({ client }: { client: ClientEntity }) => {
                   <FormControl>
                     <Input type="email" {...field} />
                   </FormControl>
+                  <FormDescription>
+                    Este correo será el usuario de acceso del cliente.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

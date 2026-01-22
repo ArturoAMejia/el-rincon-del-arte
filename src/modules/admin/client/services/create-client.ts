@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
 import {
   createClientDto,
@@ -5,6 +6,8 @@ import {
 } from "@/modules/admin/client/dto/client.dto";
 import { ClientEntity } from "@/modules/admin/client/interfaces";
 import { ClientMapper } from "@/modules/admin/client/mappers";
+import { generatePassword } from "@/modules/auth/services/generate-password";
+import { sendUserCredentialsEmail } from "@/modules/email/services/send-email";
 import { createPersonService } from "@/modules/person/services/create-person";
 
 export const createClientService = async (
@@ -12,8 +15,57 @@ export const createClientService = async (
 ): Promise<ClientEntity> => {
   try {
     const newClient = createClientDto.parse(client);
-    // First create the person via the global service
-    const createdPerson = await createPersonService(newClient.person);
+
+    const fullName =
+      `${newClient.person.name} ${newClient.person.last_name_business_name}`.trim();
+    const email = newClient.person.email.trim().toLowerCase();
+
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw new Error("Ya existe un usuario con este email");
+    }
+
+    const createdPerson = await createPersonService({
+      ...newClient.person,
+      email,
+    });
+
+    const password = generatePassword();
+
+    await auth.api.createUser({
+      body: {
+        email,
+        password,
+        name: fullName,
+        role: "client",
+      },
+    });
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new Error("Usuario no encontrado tras su creación");
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { personId: createdPerson.id, stateId: 1 },
+    });
+
+    try {
+      await sendUserCredentialsEmail({
+        to: email,
+        name: fullName,
+        password,
+      });
+    } catch (err) {
+      console.error("Error sending credentials email:", err);
+    }
 
     const created = await prisma.client.create({
       data: {
