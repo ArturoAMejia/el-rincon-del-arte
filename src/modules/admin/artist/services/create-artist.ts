@@ -32,6 +32,7 @@ export const createArtistService = async (
 
     const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
 
+    // Check if user exists BEFORE creating the person record to avoid data inconsistency
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -39,6 +40,9 @@ export const createArtistService = async (
     if (existingUser) {
       throw new Error("Ya existe un usuario con este email");
     }
+
+    // Now create the person via the global service
+    const createdPerson = await createPersonService(newArtist.person);
 
     const password = generatePassword();
 
