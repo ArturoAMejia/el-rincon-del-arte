@@ -19,11 +19,17 @@ export const createArtistService = async (
 ): Promise<ArtistEntity> => {
   try {
     const newArtist = createArtistDto.parse(artist);
-    // First create the person via the global service
-    const createdPerson = await createPersonService(newArtist.person);
+    
+    // Normalize email to ensure consistency across User and Person records
+    const email = newArtist.person.email.trim().toLowerCase();
+    
+    // First create the person via the global service with normalized email
+    const createdPerson = await createPersonService({
+      ...newArtist.person,
+      email,
+    });
 
     const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
-    const email = newArtist.person.email.trim().toLowerCase();
 
     const existingUser = await prisma.user.findUnique({
       where: { email },
