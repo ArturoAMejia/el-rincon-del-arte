@@ -14,6 +14,7 @@ import { Input } from "@/shared/components/input";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -190,6 +191,9 @@ export const UpdateArtistForm = ({ artist }: Props) => {
                   <FormControl>
                     <Input type="email" {...field} />
                   </FormControl>
+                  <FormDescription>
+                    Este correo será el usuario de acceso del artista.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

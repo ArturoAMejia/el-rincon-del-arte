@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
 import {
   createArtistDto,
@@ -5,6 +6,9 @@ import {
 } from "@/modules/admin/artist/dto/artist.dto";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistMapper } from "@/modules/admin/artist/mappers";
+import { ARTIST_CLIENT_ROLE } from "@/modules/admin/artist/constants";
+import { generatePassword } from "@/modules/auth/services/generate-password";
+import { sendUserCredentialsEmail } from "@/modules/email/services/send-email";
 import { createPersonService } from "@/modules/person/services/create-person";
 
 enum ArtistState {
@@ -16,8 +20,62 @@ export const createArtistService = async (
 ): Promise<ArtistEntity> => {
   try {
     const newArtist = createArtistDto.parse(artist);
-    // First create the person via the global service
+    
+    // Normalize email once for consistent use
+    const fullName = `${newArtist.person.name} ${newArtist.person.last_name_business_name}`.trim();
+    const email = newArtist.person.email.trim().toLowerCase();
+    
+    // First create the person via the global service with normalized email
+    const createdPerson = await createPersonService({
+      ...newArtist.person,
+      email,
+    });
+
+    // Check if user exists BEFORE creating the person record to avoid data inconsistency
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw new Error("Ya existe un usuario con este email");
+    }
+
+    // Now create the person via the global service
     const createdPerson = await createPersonService(newArtist.person);
+
+    const password = generatePassword();
+
+    await auth.api.createUser({
+      body: {
+        email,
+        password,
+        name: fullName,
+        role: ARTIST_CLIENT_ROLE,
+      },
+    });
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new Error("Usuario no encontrado tras su creación");
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { personId: createdPerson.id, stateId: 1 },
+    });
+
+    try {
+      await sendUserCredentialsEmail({
+        to: email,
+        name: fullName,
+        password,
+      });
+    } catch (err) {
+      console.error("Error sending credentials email:", err);
+    }
 
     const created = await prisma.artist.create({
       data: {
