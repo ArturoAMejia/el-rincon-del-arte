@@ -5,6 +5,7 @@ import {
 } from "@/modules/admin/artist/dto/artist.dto";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistMapper } from "@/modules/admin/artist/mappers";
+import { ARTIST_CLIENT_ROLE } from "@/modules/admin/artist/constants";
 
 export const updateArtistService = async (
   artist: UpdateArtistDto
@@ -48,7 +49,7 @@ export const updateArtistService = async (
         data: {
           name: fullName,
           email,
-          role: "artist,client",
+          role: ARTIST_CLIENT_ROLE,
         },
       });
     }
