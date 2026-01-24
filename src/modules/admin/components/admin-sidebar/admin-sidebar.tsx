@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Command,
   DollarSign,
@@ -22,7 +23,6 @@ import {
 } from "@/shared/components/sidebar";
 import { NavMain } from "@/shared/components/nav-main";
 import { NavUser } from "@/shared/components/nav-user";
-import { NavSecondary } from "@/shared/components/nav-secondary";
 import Link from "next/link";
 
 const data = {

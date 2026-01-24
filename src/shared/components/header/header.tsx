@@ -10,16 +10,16 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-7xl mx-auto py-4 px-6 md:px-0">
         <div className="flex items-center justify-between">
           <div className="flex-1">
-            <h1 className="text-2xl font-light tracking-widest text-foreground">
+            <h1 className="text-xl font-serif tracking-widest text-foreground">
               El Rincón del Arte
             </h1>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 flex-1 justify-center">
+          <nav className="hidden md:flex items-center gap-8 flex-1 justify-center font-serif">
             <Link
               href="#"
               className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
@@ -34,7 +34,7 @@ export const Header = () => {
             </Link>
             <Link
               href="#"
-              className="text-sm text-foreground/70 hover:text-foreground transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
+              className="text-sm text-foreground/70 hover:text-foreground    transition-colors hover:cursor-pointer hover:underline hover:underline-offset-5"
             >
               OBRAS
             </Link>
