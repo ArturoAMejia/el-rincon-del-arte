@@ -44,7 +44,7 @@ export default function NotificationsPage() {
     <section className="max-w-3xl space-y-8">
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold">Notificaciones</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Configura cómo quieres recibir notificaciones.
         </p>
       </div>
@@ -73,7 +73,7 @@ export default function NotificationsPage() {
                 value={option.id}
                 checked={notifyOption === option.id}
                 onChange={() => setNotifyOption(option.id as NotifyOption)}
-                className="h-4 w-4 accent-primary"
+                className="accent-primary h-4 w-4"
               />
               <span>{option.label}</span>
             </label>
@@ -87,11 +87,11 @@ export default function NotificationsPage() {
           {emailOptions.map((option) => (
             <div
               key={option.id}
-              className="flex items-center justify-between rounded-xl border px-4 py-4 gap-4"
+              className="flex items-center justify-between gap-4 rounded-xl border px-4 py-4"
             >
               <div>
                 <p className="text-sm font-medium">{option.title}</p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-muted-foreground text-xs">
                   {option.description}
                 </p>
               </div>
@@ -107,8 +107,8 @@ export default function NotificationsPage() {
                     }))
                   }
                 />
-                <span className="h-6 w-11 rounded-full bg-muted transition peer-checked:bg-primary" />
-                <span className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-background transition peer-checked:translate-x-5" />
+                <span className="bg-muted peer-checked:bg-primary h-6 w-11 rounded-full transition" />
+                <span className="bg-background absolute top-0.5 left-0.5 h-5 w-5 rounded-full transition peer-checked:translate-x-5" />
               </label>
             </div>
           ))}
@@ -124,7 +124,7 @@ export default function NotificationsPage() {
           <p className="text-sm font-medium">
             Usar configuraciones distintas para el móvil
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Puedes administrar notificaciones móviles en la app.
           </p>
         </div>

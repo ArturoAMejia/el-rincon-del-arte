@@ -35,8 +35,8 @@ export const Pagination = ({
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
   return (
-    <div className="flex items-center justify-between mt-4">
-      <div className="text-sm text-muted-foreground">
+    <div className="mt-4 flex items-center justify-between">
+      <div className="text-muted-foreground text-sm">
         Mostrando {startItem} a {endItem} de {totalItems} resultados
       </div>
 
@@ -53,7 +53,7 @@ export const Pagination = ({
         <div className="flex items-center gap-1">
           <span className="text-sm">Página</span>
           <Select value={currentPage.toString()}>
-            <SelectTrigger className="w-16 h-8">
+            <SelectTrigger className="h-8 w-16">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

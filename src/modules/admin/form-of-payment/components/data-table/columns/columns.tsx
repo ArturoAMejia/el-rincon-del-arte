@@ -19,8 +19,6 @@ export const formOfPaymentsColumns: ColumnDef<FormOfPaymentEntity>[] = [
   {
     accessorKey: "actions",
     header: "Acciones",
-    cell: ({ row }) => (
-      <FormOfPaymentRowActions formOfPayment={row.original} />
-    ),
+    cell: ({ row }) => <FormOfPaymentRowActions formOfPayment={row.original} />,
   },
 ];

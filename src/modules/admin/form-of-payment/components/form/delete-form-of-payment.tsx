@@ -52,7 +52,9 @@ export const DeleteFormOfPayment = ({ id }: Props) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>Continuar</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>
+            Continuar
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

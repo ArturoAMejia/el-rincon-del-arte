@@ -79,7 +79,7 @@ export const UpdateCategoryForm = ({ category }: UpdateCategoryFormProps) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="grid grid-cols-1 items-center gap-4 justify-center"
+            className="grid grid-cols-1 items-center justify-center gap-4"
             id="form"
           >
             <FormField
@@ -89,7 +89,11 @@ export const UpdateCategoryForm = ({ category }: UpdateCategoryFormProps) => {
                 <FormItem>
                   <FormLabel>Nombre</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ingrese el nombre" className="w-full" {...field} />
+                    <Input
+                      placeholder="Ingrese el nombre"
+                      className="w-full"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

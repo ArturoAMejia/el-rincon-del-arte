@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { X } from "lucide-react"
-import { Button } from "@/shared/components/button"
-import { Badge } from "@/shared/components/badge/badge"
+import { X } from "lucide-react";
+import { Button } from "@/shared/components/button";
+import { Badge } from "@/shared/components/badge/badge";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/select"
+} from "@/shared/components/select";
 
 interface FilterOption {
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
 interface FilterableColumn {
-  key: string
-  label: string
-  options: FilterOption[]
+  key: string;
+  label: string;
+  options: FilterOption[];
 }
 
 interface DataTableFiltersProps {
-  filters: Record<string, string>
-  onFiltersChange: (filters: Record<string, string>) => void
-  filterableColumns: FilterableColumn[]
+  filters: Record<string, string>;
+  onFiltersChange: (filters: Record<string, string>) => void;
+  filterableColumns: FilterableColumn[];
 }
 
 export function DataTableFilters({
@@ -37,24 +37,24 @@ export function DataTableFilters({
     onFiltersChange({
       ...filters,
       [key]: value,
-    })
-  }
+    });
+  };
 
   const handleRemoveFilter = (key: string) => {
-    const newFilters = { ...filters }
-    delete newFilters[key]
-    onFiltersChange(newFilters)
-  }
+    const newFilters = { ...filters };
+    delete newFilters[key];
+    onFiltersChange(newFilters);
+  };
 
   const handleClearAllFilters = () => {
-    onFiltersChange({})
-  }
+    onFiltersChange({});
+  };
 
-  const activeFilters = Object.entries(filters).filter(([, value]) => value)
+  const activeFilters = Object.entries(filters).filter(([, value]) => value);
 
   return (
     <div className="mb-4">
-      <div className="flex items-center gap-4 mb-3">
+      <div className="mb-3 flex items-center gap-4">
         {filterableColumns.map((column) => (
           <Select
             key={column.key}
@@ -83,27 +83,27 @@ export function DataTableFilters({
       </div>
 
       {activeFilters.length > 0 && (
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm text-muted-foreground">Active filters:</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-muted-foreground text-sm">Active filters:</span>
           {activeFilters.map(([key, value]) => {
-            const column = filterableColumns.find((col) => col.key === key)
-            const option = column?.options.find((opt) => opt.value === value)
+            const column = filterableColumns.find((col) => col.key === key);
+            const option = column?.options.find((opt) => opt.value === value);
             return (
               <Badge key={key} variant="secondary" className="gap-1">
                 {column?.label}: {option?.label || value}
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-auto p-0 ml-1"
+                  className="ml-1 h-auto p-0"
                   onClick={() => handleRemoveFilter(key)}
                 >
                   <X className="h-3 w-3" />
                 </Button>
               </Badge>
-            )
+            );
           })}
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -21,7 +21,7 @@ export default async function Page() {
         {allClients.success ? (
           <DataTable columns={clientsColumns} data={allClients.data} />
         ) : (
-          <div className="text-red-600 font-semibold py-4">
+          <div className="py-4 font-semibold text-red-600">
             Ocurrió un error al cargar los clientes. Por favor, inténtalo de
             nuevo más tarde.
           </div>

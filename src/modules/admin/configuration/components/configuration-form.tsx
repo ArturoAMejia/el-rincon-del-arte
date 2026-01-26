@@ -168,7 +168,7 @@ export function ConfigurationForm({
     <div className="grid gap-6">
       <div>
         <h1 className="text-2xl font-bold">Configuración</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Administra tu perfil y preferencias de la aplicación.
         </p>
       </div>
@@ -277,7 +277,7 @@ export function ConfigurationForm({
                   {form.formState.isSubmitting ? "Guardando..." : "Guardar"}
                 </Button>
                 {user?.name && (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-muted-foreground text-xs">
                     Usuario actual: {user.name}
                   </span>
                 )}
@@ -298,7 +298,7 @@ export function ConfigurationForm({
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm font-medium">Correo registrado</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {user?.email ?? "Sin correo"}
               </p>
             </div>

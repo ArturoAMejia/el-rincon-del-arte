@@ -37,7 +37,9 @@ export const ShowVoucherDetails = ({ voucher }: Props) => {
 
       <AlertDialogContent className="max-w-3xl">
         <AlertDialogHeader>
-          <AlertDialogTitle>Detalles del comprobante #{voucher.id}</AlertDialogTitle>
+          <AlertDialogTitle>
+            Detalles del comprobante #{voucher.id}
+          </AlertDialogTitle>
           <AlertDialogDescription>
             <Badge variant="secondary" className="mb-4">
               Serie: {voucher.serie || "-"}
@@ -46,12 +48,12 @@ export const ShowVoucherDetails = ({ voucher }: Props) => {
         </AlertDialogHeader>
 
         <div className="space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b">
+          <div className="flex items-center justify-between border-b pb-4">
             <div>
               <h3 className="text-lg font-semibold">
                 {voucher.client || "Cliente no disponible"}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Numeración: {voucher.numeration || "-"}
               </p>
             </div>
@@ -62,13 +64,13 @@ export const ShowVoucherDetails = ({ voucher }: Props) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Moneda
               </p>
               <p className="font-medium">{voucher.currency || "-"}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Forma de pago
               </p>
               <p className="font-medium capitalize">
@@ -76,7 +78,7 @@ export const ShowVoucherDetails = ({ voucher }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Fecha
               </p>
               <p className="font-medium">
@@ -84,7 +86,7 @@ export const ShowVoucherDetails = ({ voucher }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Hora
               </p>
               <p className="font-medium">
@@ -94,17 +96,17 @@ export const ShowVoucherDetails = ({ voucher }: Props) => {
           </div>
 
           <div>
-            <p className="text-sm font-medium text-muted-foreground mb-3">
+            <p className="text-muted-foreground mb-3 text-sm font-medium">
               Ventas relacionadas
             </p>
             {voucher.sales.length === 0 ? (
-              <div className="rounded-lg bg-muted p-4">
-                <p className="text-sm text-muted-foreground">
+              <div className="bg-muted rounded-lg p-4">
+                <p className="text-muted-foreground text-sm">
                   No hay ventas relacionadas a este comprobante.
                 </p>
               </div>
             ) : (
-              <div className="border rounded-lg overflow-hidden">
+              <div className="overflow-hidden rounded-lg border">
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-muted">

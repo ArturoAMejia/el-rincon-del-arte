@@ -1,4 +1,3 @@
-export * from "./main-content"
-export * from "./banner-promotion"
-export * from "./category-card"
-export * from "./featured-artwork"
+export * from "./main-content";
+export * from "./artwork-card";
+export * from "./featured-artwork";

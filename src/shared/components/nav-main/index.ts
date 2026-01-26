@@ -1,1 +1,1 @@
-export * from "./nav-main"
+export * from "./nav-main";

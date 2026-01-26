@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { cacheTag } from "next/cache";
 
 export type RecentSalesItem = {
   id: number;
@@ -16,6 +17,7 @@ export type RecentSalesData = {
 
 export const getRecentSales = async (): Promise<RecentSalesData> => {
   "use cache";
+  cacheTag("recent-sales");
   const now = new Date();
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 

@@ -4,6 +4,8 @@ import { getProfileAction } from "@/modules/admin/configuration/actions/settings
 export default async function ConfigurationPage() {
   const result = await getProfileAction();
   return (
-    <ConfigurationForm profile={result.success ? result.data ?? null : null} />
+    <ConfigurationForm
+      profile={result.success ? (result.data ?? null) : null}
+    />
   );
 }

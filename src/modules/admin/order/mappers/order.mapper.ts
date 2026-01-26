@@ -22,6 +22,7 @@ export class OrderMapper {
         artwork: {
           id: number;
           name: string;
+          state_id: number;
           artist: {
             id: number;
             person: { name: string; last_name_business_name: string };
@@ -59,6 +60,7 @@ export class OrderMapper {
           category: detail.artwork.category.name,
           type_art: detail.artwork.type_art.name,
           size: detail.artwork.size.name,
+          state_id: detail.artwork.state_id,
         },
         dimension: detail.artwork.dimension,
         artist_id: detail.artwork.artist ? detail.artwork.artist.id : null,

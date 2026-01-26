@@ -11,9 +11,7 @@ export default async function VouchersPage() {
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Comprobantes</h1>
-          <p>
-            Consulta los comprobantes generados por ventas. (Solo lectura)
-          </p>
+          <p>Consulta los comprobantes generados por ventas. (Solo lectura)</p>
         </div>
       </div>
 

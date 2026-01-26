@@ -23,16 +23,16 @@ export const ContactForm = () => {
   });
 
   return (
-    <section id="about" className="px-4 sm:px-6 lg:px-8 py-20">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <section id="about" className="px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
           <div>
-            <h3 className="text-3xl font-serif font-bold mb-8">Visítanos</h3>
+            <h3 className="mb-8 font-serif text-3xl font-bold">Visítanos</h3>
             <div className="space-y-6">
               <div className="flex gap-4">
-                <MapPin className="w-6 h-6 text-[#c17855] flex-shrink-0 mt-1" />
+                <MapPin className="mt-1 h-6 w-6 flex-shrink-0 text-[#c17855]" />
                 <div>
-                  <p className="font-semibold mb-1">Dirección de la Galería</p>
+                  <p className="mb-1 font-semibold">Dirección de la Galería</p>
                   <p className="text-[#5a5a5a]">
                     Altamira, Managua
                     <br />
@@ -41,9 +41,9 @@ export const ContactForm = () => {
                 </div>
               </div>
               <div className="flex gap-4">
-                <Clock className="w-6 h-6 text-[#c17855] flex-shrink-0 mt-1" />
+                <Clock className="mt-1 h-6 w-6 flex-shrink-0 text-[#c17855]" />
                 <div>
-                  <p className="font-semibold mb-1">Horario de Atención</p>
+                  <p className="mb-1 font-semibold">Horario de Atención</p>
                   <p className="text-[#5a5a5a]">
                     Martes - Domingo: 10 AM - 6 PM
                     <br />
@@ -52,9 +52,9 @@ export const ContactForm = () => {
                 </div>
               </div>
               <div className="flex gap-4">
-                <Calendar className="w-6 h-6 text-[#c17855] flex-shrink-0 mt-1" />
+                <Calendar className="mt-1 h-6 w-6 flex-shrink-0 text-[#c17855]" />
                 <div>
-                  <p className="font-semibold mb-1">Eventos Especiales</p>
+                  <p className="mb-1 font-semibold">Eventos Especiales</p>
                   <p className="text-[#5a5a5a]">
                     First Friday: Extended hours until 9 PM
                   </p>
@@ -64,7 +64,7 @@ export const ContactForm = () => {
           </div>
 
           <div>
-            <h3 className="text-3xl font-serif font-bold mb-8">Contáctanos</h3>
+            <h3 className="mb-8 font-serif text-3xl font-bold">Contáctanos</h3>
             <Form {...form}>
               <form className="space-y-4">
                 <FormField
@@ -74,7 +74,7 @@ export const ContactForm = () => {
                     <Input
                       type="text"
                       placeholder="Tu nombre"
-                      className="w-full px-4 py-3 border border-[#e0dada]  focus:outline-none focus:border-[#c17855] transition"
+                      className="w-full border border-[#e0dada] px-4 py-3 transition focus:border-[#c17855] focus:outline-none"
                       {...field}
                     />
                   )}
@@ -86,7 +86,7 @@ export const ContactForm = () => {
                     <Input
                       type="email"
                       placeholder="Tu correo electrónico"
-                      className="w-full px-4 py-3 border border-[#e0dada]  focus:outline-none focus:border-[#c17855] transition"
+                      className="w-full border border-[#e0dada] px-4 py-3 transition focus:border-[#c17855] focus:outline-none"
                       {...field}
                     />
                   )}
@@ -98,12 +98,12 @@ export const ContactForm = () => {
                     <textarea
                       placeholder="Tu mensaje"
                       rows={4}
-                      className="w-full px-4 py-3 border border-[#e0dada]  focus:outline-none focus:border-[#c17855] transition"
+                      className="w-full border border-[#e0dada] px-4 py-3 transition focus:border-[#c17855] focus:outline-none"
                       {...field}
                     />
                   )}
                 />
-                <Button className="w-full bg-[#c17855] hover:bg-[#a85d45] text-white rounded-none py-3">
+                <Button className="w-full rounded-none bg-[#c17855] py-3 text-white hover:bg-[#a85d45]">
                   Enviar Mensaje
                 </Button>
               </form>

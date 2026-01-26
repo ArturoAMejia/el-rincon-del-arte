@@ -148,7 +148,7 @@ export const CreateOrderForm = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="grid grid-cols-3 items-start gap-4 justify-center"
+            className="grid grid-cols-3 items-start justify-center gap-4"
             id="form"
           >
             <FormField
@@ -361,7 +361,7 @@ export const CreateOrderForm = ({
 
             <div className="col-span-3 space-y-2">
               {cartItems.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   No hay obras seleccionadas
                 </p>
               ) : (
@@ -372,7 +372,7 @@ export const CreateOrderForm = ({
                   >
                     <div className="col-span-6">
                       <p className="text-sm font-medium">{item.name}</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Precio: {item.price}
                       </p>
                     </div>

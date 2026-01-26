@@ -5,7 +5,6 @@ import { MainContent } from "@/modules/home/components/main-content";
 import { MainHero } from "@/modules/home/components/main-hero";
 import { Pricing } from "@/modules/home/components/pricing";
 import { StatsSite } from "@/modules/home/components/stats-site";
-// import Image from "next/image";
 
 export default function Home() {
   const images = [

@@ -15,12 +15,12 @@ const AdminPage = async () => {
   ]);
 
   return (
-    <section className="p-4 w-full">
+    <section className="w-full p-4">
       <div className="mb-4">
-        <h1 className="text-2xl sm:text-3xl font-bold ">
+        <h1 className="text-2xl font-bold sm:text-3xl">
           El Rincón del Arte Panel Administrativo
         </h1>
-        <p className="text-sm  mt-1">
+        <p className="mt-1 text-sm">
           Resumen de estadísticas y actividades recientes del sitio.
         </p>
       </div>

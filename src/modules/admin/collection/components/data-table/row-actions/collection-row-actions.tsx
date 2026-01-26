@@ -1,5 +1,8 @@
 import { CollectionEntity } from "@/modules/admin/collection/interfaces";
-import { UpdateCollectionForm, DeactivateCollection } from "@/modules/admin/collection/components/form";
+import {
+  UpdateCollectionForm,
+  DeactivateCollection,
+} from "@/modules/admin/collection/components/form";
 
 interface Props {
   collection: CollectionEntity;

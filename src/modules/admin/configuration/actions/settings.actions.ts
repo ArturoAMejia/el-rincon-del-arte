@@ -57,7 +57,6 @@ const EMAIL_VERIFICATION_PREFIX = "email-verification:";
 const EMAIL_VERIFICATION_TTL_MS = 1000 * 60 * 60 * 24;
 
 export async function getProfileAction() {
-  
   try {
     const sessionUser = await getSessionUser();
     if (!sessionUser?.id) {

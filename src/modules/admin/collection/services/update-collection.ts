@@ -3,7 +3,10 @@ import { CollectionMapper } from "../mappers";
 import { CollectionEntity } from "../interfaces";
 import { UpdateCollectionDto } from "../dto";
 
-export const updateCollection = async (id: number, data: UpdateCollectionDto): Promise<CollectionEntity> => {
+export const updateCollection = async (
+  id: number,
+  data: UpdateCollectionDto
+): Promise<CollectionEntity> => {
   try {
     const collection = await prisma.collection.update({
       where: { id },

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -56,7 +50,11 @@ export function OrdersSalesAreaChart({
           config={chartConfig}
           className="aspect-auto h-[260px] w-full"
         >
-          <AreaChart accessibilityLayer data={data} margin={{ left: 0, right: 8 }}>
+          <AreaChart
+            accessibilityLayer
+            data={data}
+            margin={{ left: 0, right: 8 }}
+          >
             <defs>
               <linearGradient id="fillOrders" x1="0" y1="0" x2="0" y2="1">
                 <stop

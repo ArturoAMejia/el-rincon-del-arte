@@ -1,1 +1,1 @@
-export * from "./nav-secondary"
+export * from "./nav-secondary";

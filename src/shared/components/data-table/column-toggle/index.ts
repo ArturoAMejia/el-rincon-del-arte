@@ -1,1 +1,1 @@
-export * from "./column-toggle"
+export * from "./column-toggle";

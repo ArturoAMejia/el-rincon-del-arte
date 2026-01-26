@@ -21,7 +21,7 @@ export default async function Page() {
         {allUsers.success ? (
           <DataTable columns={usersColumns} data={allUsers.data} />
         ) : (
-          <div className="text-red-600 font-semibold py-4">
+          <div className="py-4 font-semibold text-red-600">
             Ocurrió un error al cargar los usuarios. Por favor, inténtalo de
             nuevo más tarde.
           </div>

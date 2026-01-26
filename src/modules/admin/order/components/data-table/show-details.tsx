@@ -43,12 +43,12 @@ export const ShowOrderDetails = ({ order }: Props) => {
 
         <div className="space-y-6">
           {/* Transaction Header */}
-          <div className="flex items-center justify-between pb-4 border-b">
+          <div className="flex items-center justify-between border-b pb-4">
             <div>
               <h3 className="text-lg font-semibold">
                 {order.client || "Cliente Genérico"}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Venta ID: {order.id}
               </p>
             </div>
@@ -59,12 +59,12 @@ export const ShowOrderDetails = ({ order }: Props) => {
 
           {/* Amount Section */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-lg bg-muted p-4">
-              <p className="text-sm text-muted-foreground mb-1">Total</p>
+            <div className="bg-muted rounded-lg p-4">
+              <p className="text-muted-foreground mb-1 text-sm">Total</p>
               <p className="text-2xl font-bold">${order.subtotal.toFixed(2)}</p>
             </div>
-            <div className="rounded-lg bg-muted p-4">
-              <p className="text-sm text-muted-foreground mb-1">
+            <div className="bg-muted rounded-lg p-4">
+              <p className="text-muted-foreground mb-1 text-sm">
                 Tipo de venta
               </p>
               <p className="text-lg font-semibold capitalize">
@@ -76,7 +76,7 @@ export const ShowOrderDetails = ({ order }: Props) => {
           {/* Details Grid */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Fecha
               </p>
               <p className="font-medium">
@@ -84,7 +84,7 @@ export const ShowOrderDetails = ({ order }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Hora
               </p>
               <p className="font-medium">
@@ -92,7 +92,7 @@ export const ShowOrderDetails = ({ order }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Forma de pago
               </p>
               <p className="font-medium capitalize">{order.form_of_payment}</p>
@@ -103,10 +103,10 @@ export const ShowOrderDetails = ({ order }: Props) => {
 
         {order.order_detail.length > 0 && (
           <div>
-            <p className="text-sm font-medium text-muted-foreground mb-3">
+            <p className="text-muted-foreground mb-3 text-sm font-medium">
               Items
             </p>
-            <div className="border rounded-lg overflow-hidden">
+            <div className="overflow-hidden rounded-lg border">
               <Table>
                 <TableHeader>
                   <TableRow className="bg-muted">
@@ -142,7 +142,7 @@ export const ShowOrderDetails = ({ order }: Props) => {
             <div className="mt-4 flex flex-col items-end gap-2">
               <div className="flex gap-4 text-sm">
                 <span className="text-muted-foreground">Subtotal:</span>
-                <span className="font-medium w-24 text-right">
+                <span className="w-24 text-right font-medium">
                   ${order.subtotal.toFixed(2)}
                 </span>
               </div>
@@ -150,13 +150,13 @@ export const ShowOrderDetails = ({ order }: Props) => {
                 <span className="text-muted-foreground">
                   Impuesto ({Number(process.env.NEXT_PUBLIC_TAX_RATE) * 100}%):
                 </span>
-                <span className="font-medium w-24 text-right">
+                <span className="w-24 text-right font-medium">
                   ${order.tax.toFixed(2)}
                 </span>
               </div>
-              <div className="flex gap-4 border-t pt-2 mt-2">
+              <div className="mt-2 flex gap-4 border-t pt-2">
                 <span className="font-semibold">Total:</span>
-                <span className="font-bold text-lg w-24 text-right">
+                <span className="w-24 text-right text-lg font-bold">
                   ${order.total.toFixed(2)}
                 </span>
               </div>

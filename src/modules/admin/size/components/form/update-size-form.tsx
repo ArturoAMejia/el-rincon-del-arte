@@ -44,7 +44,7 @@ export const UpdateSizeForm = ({ size }: { size: SizeEntity }) => {
   const handleSubmit = async (formData: UpdateSizeDto) => {
     setIsLoading(true);
     try {
-      const result = await updateSizeAction(formData.id, formData);
+      const result = await updateSizeAction(formData);
       if (result.success) {
         toast.success("Medida actualizada");
         setOpen(false);

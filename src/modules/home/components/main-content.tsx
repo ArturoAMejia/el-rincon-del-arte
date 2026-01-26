@@ -3,7 +3,7 @@ import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 import Image from "next/image";
 export const MainContent = ({ images }: { images: string[] }) => {
   return (
-    <section className="py-8 timeline-view animate-zoom-in animate-range-[entry_5%_contain_20%]">
+    <section className="timeline-view animate-zoom-in animate-range-[entry_5%_contain_20%] py-8">
       <div className="mx-auto max-w-7xl space-y-12 sm:space-y-16 lg:space-y-24">
         {/* Section Header */}
         <div className="space-y-4">
@@ -11,7 +11,7 @@ export const MainContent = ({ images }: { images: string[] }) => {
             Nuestra cultura
           </Badge>
 
-          <h2 className="text-2xl font-semibold sm:text-3xl lg:text-4xl font-serif">
+          <h2 className="font-serif text-2xl font-semibold sm:text-3xl lg:text-4xl">
             Nuestro Portafolio de obras de arte más destacado
           </h2>
 
@@ -45,7 +45,7 @@ export const MainContent = ({ images }: { images: string[] }) => {
 
           {/* Right Section */}
           <div className="space-y-6 px-6">
-            <h3 className="text-3xl font-medium font-serif">
+            <h3 className="font-serif text-3xl font-medium">
               Arte Nicaragüense
             </h3>
 

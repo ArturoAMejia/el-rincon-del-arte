@@ -79,7 +79,7 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="mx-auto w-full max-w-md">
       <CardHeader>
         <CardTitle>Create an account</CardTitle>
         <CardDescription>
@@ -136,7 +136,7 @@ export function SignUpForm() {
         </Form>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Already have an account?{" "}
           <a href="/login" className="text-primary hover:underline">
             Sign in

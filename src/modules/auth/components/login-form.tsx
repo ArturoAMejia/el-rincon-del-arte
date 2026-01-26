@@ -89,7 +89,7 @@ export function LoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="mx-auto w-full max-w-md">
       <CardHeader>
         <CardTitle>Welcome back</CardTitle>
         <CardDescription>
@@ -136,7 +136,7 @@ export function LoginForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
+            <span className="bg-background text-muted-foreground px-2">
               Or continue with
             </span>
           </div>
@@ -171,7 +171,7 @@ export function LoginForm() {
         </Button>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Don&apos;t have an account?{" "}
           <a href="/sign-up" className="text-primary hover:underline">
             Sign up

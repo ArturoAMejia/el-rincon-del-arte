@@ -50,6 +50,11 @@ export const ArtworkDataTableClient = ({
     {
       accessorKey: "description",
       header: "Descripción",
+      cell: ({ row }) => (
+        <span className="block max-w-xs truncate">
+          {row.original.description}
+        </span>
+      ),
     },
     {
       accessorKey: "category",

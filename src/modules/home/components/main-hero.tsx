@@ -1,24 +1,24 @@
 export const MainHero = () => {
   return (
-    <section className="relative h-[600px] md:h-[700px] overflow-hidden flex items-center justify-center animate-fade-in animate-delay-200">
+    <section className="animate-fade-in animate-delay-200 relative flex h-[600px] items-center justify-center overflow-hidden md:h-[700px]">
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-72 h-72 bg-muted rounded-full mix-blend-multiply filter blur-3xl"></div>
+        <div className="bg-accent absolute top-20 left-20 h-72 w-72 rounded-full mix-blend-multiply blur-3xl filter"></div>
+        <div className="bg-muted absolute right-20 bottom-20 h-72 w-72 rounded-full mix-blend-multiply blur-3xl filter"></div>
       </div>
 
-      <div className="relative z-10 text-center max-w-2xl px-4 sm:px-6">
-        <h2 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tighter text-foreground mb-6">
+      <div className="relative z-10 max-w-2xl px-4 text-center sm:px-6">
+        <h2 className="text-foreground mb-6 text-5xl font-light tracking-tighter sm:text-6xl lg:text-7xl">
           Descubre Obras de Arte Extraordinarias de artistas nicaragüenses
         </h2>
-        <p className="text-lg text-foreground/60 mb-8 font-light">
+        <p className="text-foreground/60 mb-8 text-lg font-light">
           Explora nuestra colección curada de arte nicaragüense, desde piezas
           clásicas hasta contemporáneas, y encuentra la obra perfecta para ti.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium">
+        <div className="flex flex-col justify-center gap-4 sm:flex-row">
+          <button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-3 font-medium transition-colors">
             Explorar Obras
           </button>
-          <button className="px-8 py-3 border border-border text-foreground rounded-lg hover:bg-muted transition-colors font-medium">
+          <button className="border-border text-foreground hover:bg-muted rounded-lg border px-8 py-3 font-medium transition-colors">
             Ver Artistas
           </button>
         </div>

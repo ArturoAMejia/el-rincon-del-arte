@@ -39,9 +39,7 @@ export async function getSalesAction(): Promise<{
   }
 }
 
-export async function createSaleAction(
-  formData: CreateSaleDto
-): Promise<{
+export async function createSaleAction(formData: CreateSaleDto): Promise<{
   success: boolean;
   data?: SaleEntity;
   error?: string;
@@ -51,6 +49,7 @@ export async function createSaleAction(
     updateTag("sales");
     updateTag("vouchers");
     updateTag("order");
+    updateTag("recent-sales");
 
     return {
       success: true,

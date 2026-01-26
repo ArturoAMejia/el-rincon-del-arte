@@ -53,7 +53,7 @@ export const DataTable = <TData, TValue>({
 
   return (
     <Card className="p-4">
-      <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center px-0">
+      <CardHeader className="flex flex-col gap-4 px-0 sm:flex-row sm:items-center">
         <DataTableHeader
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}

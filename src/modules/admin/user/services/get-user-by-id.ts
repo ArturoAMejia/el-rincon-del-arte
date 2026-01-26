@@ -4,7 +4,10 @@ import { UserEntity } from "@/modules/admin/user/interfaces";
 
 export const getUserById = async (id: string): Promise<UserEntity | null> => {
   try {
-    const user = await prisma.user.findUnique({ where: { id }, include: { person: true } });
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: { person: true },
+    });
     if (!user) return null;
     return UserMapper.toDTO(user);
   } catch (error) {
