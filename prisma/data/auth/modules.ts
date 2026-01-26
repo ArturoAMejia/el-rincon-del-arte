@@ -1,4 +1,3 @@
-
 export const modules = [
   {
     name: "Artistas",

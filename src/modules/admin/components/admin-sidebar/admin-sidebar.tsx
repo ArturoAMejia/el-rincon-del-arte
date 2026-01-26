@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Command,
   DollarSign,
@@ -22,7 +23,6 @@ import {
 } from "@/shared/components/sidebar";
 import { NavMain } from "@/shared/components/nav-main";
 import { NavUser } from "@/shared/components/nav-user";
-import { NavSecondary } from "@/shared/components/nav-secondary";
 import Link from "next/link";
 
 const data = {
@@ -136,7 +136,7 @@ export function AdminSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/admin">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">

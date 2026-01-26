@@ -121,7 +121,7 @@ export const CreateSaleForm = ({ orders }: Props) => {
                     </FormControl>
                     <SelectContent>
                       {orders.length === 0 && (
-                        <div className="px-3 py-2 text-sm text-muted-foreground">
+                        <div className="text-muted-foreground px-3 py-2 text-sm">
                           No hay órdenes disponibles
                         </div>
                       )}
@@ -142,13 +142,13 @@ export const CreateSaleForm = ({ orders }: Props) => {
               <div className="grid grid-cols-3 gap-4 rounded-lg border p-4">
                 <div className="col-span-3 flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">Cliente</p>
+                    <p className="text-muted-foreground text-sm">Cliente</p>
                     <p className="font-semibold">
                       {selectedOrder.client || "Sin cliente"}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-muted-foreground">Total</p>
+                    <p className="text-muted-foreground text-sm">Total</p>
                     <p className="text-xl font-bold">
                       ${selectedOrder.total.toFixed(2)}
                     </p>
@@ -156,20 +156,20 @@ export const CreateSaleForm = ({ orders }: Props) => {
                 </div>
 
                 <div>
-                  <p className="text-sm text-muted-foreground">Tipo</p>
+                  <p className="text-muted-foreground text-sm">Tipo</p>
                   <p className="font-medium">{selectedOrder.order_type}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Moneda</p>
+                  <p className="text-muted-foreground text-sm">Moneda</p>
                   <p className="font-medium">{selectedOrder.currency}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Forma de pago</p>
+                  <p className="text-muted-foreground text-sm">Forma de pago</p>
                   <p className="font-medium">{selectedOrder.form_of_payment}</p>
                 </div>
 
                 <div className="col-span-3">
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="text-muted-foreground mb-2 text-sm">
                     Detalle de la orden
                   </p>
                   <div className="space-y-2">
@@ -182,7 +182,7 @@ export const CreateSaleForm = ({ orders }: Props) => {
                           <p className="text-sm font-medium">
                             {item.artwork.name}
                           </p>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-muted-foreground text-xs">
                             Cantidad: {item.quantity}
                           </p>
                         </div>

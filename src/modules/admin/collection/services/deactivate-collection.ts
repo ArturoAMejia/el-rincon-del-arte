@@ -2,7 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { CollectionMapper } from "../mappers";
 import { CollectionEntity } from "../interfaces";
 
-export const deactivateCollection = async (id: number): Promise<CollectionEntity> => {
+export const deactivateCollection = async (
+  id: number
+): Promise<CollectionEntity> => {
   try {
     const collection = await prisma.collection.update({
       where: { id },

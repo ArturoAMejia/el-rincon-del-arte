@@ -43,7 +43,7 @@ export const OverviewStats = ({ data }: { data: OverviewStatsData | null }) => {
 
   if (data === null) {
     return (
-      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
         {[
           { title: "Usuarios", icon: icons.users },
           { title: "Artistas", icon: icons.artists },
@@ -54,18 +54,16 @@ export const OverviewStats = ({ data }: { data: OverviewStatsData | null }) => {
         ].map((stat) => (
           <div
             key={stat.title}
-            className="rounded-lg sm:rounded-xl p-3 sm:p-4 border "
+            className="rounded-lg border p-3 sm:rounded-xl sm:p-4"
           >
             <div className="flex items-center justify-between space-y-0 pb-2">
-              <div className=" flex-shrink-0">{stat.icon}</div>
+              <div className="flex-shrink-0">{stat.icon}</div>
             </div>
             <div className="space-y-1">
-              <div className="text-lg sm:text-xl font-bold ">—</div>
+              <div className="text-lg font-bold sm:text-xl">—</div>
               <div className="space-y-0.5">
-                <h3 className="text-xs sm:text-sm font-medium ">
-                  {stat.title}
-                </h3>
-                <p className="text-xs ">No se pudo cargar</p>
+                <h3 className="text-xs font-medium sm:text-sm">{stat.title}</h3>
+                <p className="text-xs">No se pudo cargar</p>
               </div>
             </div>
           </div>
@@ -119,25 +117,25 @@ export const OverviewStats = ({ data }: { data: OverviewStatsData | null }) => {
   ];
 
   return (
-    <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
       {stats.map((stat) => (
         <div
           key={stat.title}
-          className="rounded-lg sm:rounded-xl p-3 sm:p-4 border  hover:shadow-md transition-shadow"
+          className="rounded-lg border p-3 transition-shadow hover:shadow-md sm:rounded-xl sm:p-4"
         >
           <div className="flex items-center justify-between space-y-0 pb-2">
             <div className="flex-shrink-0">{stat.icon}</div>
             {stat.meta ? (
-              <div className="text-[10px] sm:text-xs  text-right">
+              <div className="text-right text-[10px] sm:text-xs">
                 {stat.meta}
               </div>
             ) : null}
           </div>
           <div className="space-y-1">
-            <div className="text-lg sm:text-xl font-bold ">{stat.value}</div>
+            <div className="text-lg font-bold sm:text-xl">{stat.value}</div>
             <div className="space-y-0.5">
-              <h3 className="text-xs sm:text-sm font-medium ">{stat.title}</h3>
-              <p className="text-xs ">{stat.description}</p>
+              <h3 className="text-xs font-medium sm:text-sm">{stat.title}</h3>
+              <p className="text-xs">{stat.description}</p>
             </div>
           </div>
         </div>

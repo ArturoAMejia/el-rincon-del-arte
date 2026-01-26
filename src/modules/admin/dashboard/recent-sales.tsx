@@ -43,7 +43,7 @@ export function RecentSales({ data }: { data: RecentSalesData }) {
       <CardContent>
         <div className="space-y-6">
           {data.sales.length === 0 ? (
-            <div className="text-sm text-muted-foreground">
+            <div className="text-muted-foreground text-sm">
               No hay ventas recientes.
             </div>
           ) : (
@@ -62,10 +62,10 @@ export function RecentSales({ data }: { data: RecentSalesData }) {
                       </AvatarFallback>
                     </Avatar>
                     <div className="space-y-1">
-                      <p className="text-sm font-medium leading-none">
+                      <p className="text-sm leading-none font-medium">
                         {sale.clientName}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {sale.clientEmail}
                       </p>
                     </div>

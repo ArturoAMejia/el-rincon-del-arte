@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/shared/components/data-table/column";
 import { ArtworkEntity } from "@/modules/admin/artwork/interfaces";

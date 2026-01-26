@@ -43,12 +43,12 @@ export const ShowSaleDetails = ({ sale }: Props) => {
         </AlertDialogHeader>
 
         <div className="space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b">
+          <div className="flex items-center justify-between border-b pb-4">
             <div>
               <h3 className="text-lg font-semibold">
                 {sale.order.client || "Cliente genérico"}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Comprobante: {sale.voucher.numeration || "Pendiente"}
               </p>
             </div>
@@ -58,12 +58,12 @@ export const ShowSaleDetails = ({ sale }: Props) => {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-lg bg-muted p-4">
-              <p className="text-sm text-muted-foreground mb-1">Total</p>
+            <div className="bg-muted rounded-lg p-4">
+              <p className="text-muted-foreground mb-1 text-sm">Total</p>
               <p className="text-2xl font-bold">${sale.total.toFixed(2)}</p>
             </div>
-            <div className="rounded-lg bg-muted p-4">
-              <p className="text-sm text-muted-foreground mb-1">Tipo</p>
+            <div className="bg-muted rounded-lg p-4">
+              <p className="text-muted-foreground mb-1 text-sm">Tipo</p>
               <p className="text-lg font-semibold capitalize">
                 {sale.order.order_type}
               </p>
@@ -72,7 +72,7 @@ export const ShowSaleDetails = ({ sale }: Props) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Fecha
               </p>
               <p className="font-medium">
@@ -80,7 +80,7 @@ export const ShowSaleDetails = ({ sale }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Hora
               </p>
               <p className="font-medium">
@@ -88,7 +88,7 @@ export const ShowSaleDetails = ({ sale }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Forma de pago
               </p>
               <p className="font-medium capitalize">
@@ -96,7 +96,7 @@ export const ShowSaleDetails = ({ sale }: Props) => {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-muted-foreground mb-1 text-sm font-medium">
                 Comprobante
               </p>
               <p className="font-medium capitalize">
@@ -108,16 +108,18 @@ export const ShowSaleDetails = ({ sale }: Props) => {
 
         {sale.order.order_detail.length > 0 && (
           <div>
-            <p className="text-sm font-medium text-muted-foreground mb-3">
+            <p className="text-muted-foreground mb-3 text-sm font-medium">
               Items
             </p>
-            <div className="border rounded-lg overflow-hidden">
+            <div className="overflow-hidden rounded-lg border">
               <Table>
                 <TableHeader>
                   <TableRow className="bg-muted">
                     <TableHead>Obra</TableHead>
                     <TableHead className="text-right">Cantidad</TableHead>
-                    <TableHead className="text-right">Precio unitario</TableHead>
+                    <TableHead className="text-right">
+                      Precio unitario
+                    </TableHead>
                     <TableHead className="text-right">Total</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -127,7 +129,9 @@ export const ShowSaleDetails = ({ sale }: Props) => {
                       <TableCell className="font-medium">
                         {item.artwork.name}
                       </TableCell>
-                      <TableCell className="text-right">{item.quantity}</TableCell>
+                      <TableCell className="text-right">
+                        {item.quantity}
+                      </TableCell>
                       <TableCell className="text-right">
                         ${item.price.toFixed(2)}
                       </TableCell>
@@ -143,7 +147,7 @@ export const ShowSaleDetails = ({ sale }: Props) => {
             <div className="mt-4 flex flex-col items-end gap-2">
               <div className="flex gap-4 text-sm">
                 <span className="text-muted-foreground">Subtotal:</span>
-                <span className="font-medium w-24 text-right">
+                <span className="w-24 text-right font-medium">
                   ${sale.order.subtotal.toFixed(2)}
                 </span>
               </div>
@@ -151,13 +155,13 @@ export const ShowSaleDetails = ({ sale }: Props) => {
                 <span className="text-muted-foreground">
                   Impuesto ({Number(process.env.NEXT_PUBLIC_TAX_RATE) * 100}%):
                 </span>
-                <span className="font-medium w-24 text-right">
+                <span className="w-24 text-right font-medium">
                   ${sale.order.tax.toFixed(2)}
                 </span>
               </div>
-              <div className="flex gap-4 border-t pt-2 mt-2">
+              <div className="mt-2 flex gap-4 border-t pt-2">
                 <span className="font-semibold">Total:</span>
-                <span className="font-bold text-lg w-24 text-right">
+                <span className="w-24 text-right text-lg font-bold">
                   ${sale.order.total.toFixed(2)}
                 </span>
               </div>

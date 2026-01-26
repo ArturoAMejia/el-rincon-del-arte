@@ -70,7 +70,7 @@ export const CreateCategoryForm = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="grid grid-cols-1 items-center gap-4 justify-center"
+            className="grid grid-cols-1 items-center justify-center gap-4"
             id="form"
           >
             <FormField

@@ -10,6 +10,7 @@ import {
   deactivateArtworkService,
 } from "../services";
 import { CreateArtworkDto, UpdateArtworkDto } from "../dto/artwork.dto";
+import { getArtworksByArtist } from "../services/get-artworks-by-artist";
 
 export async function createArtworkAction(
   formData: CreateArtworkDto
@@ -177,5 +178,39 @@ export async function deactivateArtwork(
       return { success: false, error: error.message };
     }
     return { success: false, error: "An unexpected error occurred" };
+  }
+}
+
+export async function getArtworkByArtist(artistId: number): Promise<{
+  success: boolean;
+  data: ArtworkEntity[];
+  error?: string;
+}> {
+  "use cache";
+  cacheTag("artworks-by-artist-" + artistId);
+  try {
+    // Get artworks by artist
+    const artworks = await getArtworksByArtist(artistId);
+
+    return {
+      success: true,
+      data: artworks,
+    };
+  } catch (error) {
+    console.error("Error fetching artworks by artist:", error);
+
+    if (error instanceof Error) {
+      return {
+        success: false,
+        error: error.message,
+        data: [],
+      };
+    }
+
+    return {
+      success: false,
+      error: "An unexpected error occurred",
+      data: [],
+    };
   }
 }

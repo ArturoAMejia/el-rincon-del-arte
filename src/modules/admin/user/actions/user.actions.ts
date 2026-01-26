@@ -10,7 +10,10 @@ import {
   deactivateUserService,
   reactivateUserService,
 } from "@/modules/admin/user/services";
-import { CreateUserDto, UpdateUserDto } from "@/modules/admin/user/dto/user.dto";
+import {
+  CreateUserDto,
+  UpdateUserDto,
+} from "@/modules/admin/user/dto/user.dto";
 
 export async function createUserAction(
   formData: CreateUserDto
@@ -38,7 +41,8 @@ export async function getUsersAction(): Promise<{
     return { success: true, data: users };
   } catch (error) {
     console.error("Error fetching users:", error);
-    if (error instanceof Error) return { success: false, error: error.message, data: [] };
+    if (error instanceof Error)
+      return { success: false, error: error.message, data: [] };
     return { success: false, error: "An unexpected error occurred", data: [] };
   }
 }
@@ -73,7 +77,9 @@ export async function updateUserAction(
   }
 }
 
-export async function deactivateUserAction(id: string): Promise<{ success: boolean; error?: string }> {
+export async function deactivateUserAction(
+  id: string
+): Promise<{ success: boolean; error?: string }> {
   try {
     await deactivateUserService(id);
     updateTag("users");
@@ -85,7 +91,9 @@ export async function deactivateUserAction(id: string): Promise<{ success: boole
   }
 }
 
-export async function reactivateUserAction(id: string): Promise<{ success: boolean; error?: string }> {
+export async function reactivateUserAction(
+  id: string
+): Promise<{ success: boolean; error?: string }> {
   try {
     await reactivateUserService(id);
     updateTag("users");

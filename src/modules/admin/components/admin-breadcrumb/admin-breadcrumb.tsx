@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -6,14 +6,14 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from "@/shared/components/breadcrumb"
-import { SidebarTrigger } from "@/shared/components/sidebar"
-import { Separator } from "@/shared/components/separator"
-import { usePathname } from "next/navigation"
+} from "@/shared/components/breadcrumb";
+import { SidebarTrigger } from "@/shared/components/sidebar";
+import { Separator } from "@/shared/components/separator";
+import { usePathname } from "next/navigation";
 
 export const AdminBreadcrumb = () => {
-  const paths = usePathname()
-  const pathNames = paths.split("/").filter((path) => path)
+  const paths = usePathname();
+  const pathNames = paths.split("/").filter((path) => path);
 
   return (
     <div className="flex items-center gap-2 px-4">
@@ -41,5 +41,5 @@ export const AdminBreadcrumb = () => {
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  )
-}
+  );
+};

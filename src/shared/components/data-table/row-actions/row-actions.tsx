@@ -1,16 +1,16 @@
-import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react"
+import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/shared/components/dropdown-menu"
-import { Button } from "@/shared/components/button"
+} from "@/shared/components/dropdown-menu";
+import { Button } from "@/shared/components/button";
 
 interface DataTableRowActionsProps<TData> {
-  row: TData
-  onAction: (action: string, row: TData) => void
+  row: TData;
+  onAction: (action: string, row: TData) => void;
 }
 
 export const DataTableRowActions = <TData,>({
@@ -44,5 +44,5 @@ export const DataTableRowActions = <TData,>({
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};

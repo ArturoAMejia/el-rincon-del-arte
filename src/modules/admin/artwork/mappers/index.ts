@@ -1,1 +1,1 @@
-export * from "./artwork.mapper"
+export * from "./artwork.mapper";

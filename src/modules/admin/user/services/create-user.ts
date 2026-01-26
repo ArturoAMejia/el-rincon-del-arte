@@ -31,7 +31,7 @@ export const createUserService = async (
         email: parsed.email,
         password,
         name: parsed.name,
-        role: "user",
+        role: "client",
       },
     });
 

@@ -26,17 +26,23 @@ export type SaleWithRelations = sale & {
       artwork: {
         id: number;
         name: string;
-        dimension: string;
-        description: string;
-        price: number;
+        state_id: number;
         artist: {
           id: number;
           person: { name: string; last_name_business_name: string };
         };
-        collection: { id: number; name: string } | null;
-        category: { id: number; name: string } | null;
-        type_art: { id: number; name: string } | null;
-        size: { id: number; name: string } | null;
+        collection_id: number;
+        category_id: number;
+        type_art_id: number;
+        size_id: number;
+        artist_id: number;
+        collection: { id: number; name: string };
+        category: { id: number; name: string };
+        type_art: { id: number; name: string };
+        size: { id: number; name: string };
+        dimension: string;
+        description: string;
+        price: number;
       };
     }[];
   };
@@ -82,6 +88,7 @@ export class SaleMapper {
           amount: detail.amount,
           artwork: {
             ...detail.artwork,
+            state_id: detail.artwork.state_id,
             artist: `${detail.artwork.artist.person.name} ${detail.artwork.artist.person.last_name_business_name}`,
             collection: detail.artwork.collection?.name ?? null,
             category: detail.artwork.category?.name ?? null,

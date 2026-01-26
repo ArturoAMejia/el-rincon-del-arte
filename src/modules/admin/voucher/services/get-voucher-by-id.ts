@@ -2,7 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { VoucherEntity } from "../interfaces";
 import { VoucherMapper } from "../mappers";
 
-export const getVoucherById = async (id: number): Promise<VoucherEntity | null> => {
+export const getVoucherById = async (
+  id: number
+): Promise<VoucherEntity | null> => {
   try {
     const voucher = await prisma.voucher.findUnique({
       where: { id },

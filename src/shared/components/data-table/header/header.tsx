@@ -20,16 +20,16 @@ export function DataTableHeader({
   totalCount,
 }: DataTableHeaderProps) {
   return (
-    <div className="flex items-center justify-between gap-4 mb-4">
+    <div className="mb-4 flex items-center justify-between gap-4">
       <div className="flex items-center gap-4">
         {searchableColumns.length > 0 && (
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform" />
             <Input
               placeholder={`Buscar ${searchableColumns.join(", ")}...`}
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-10 w-64"
+              className="w-64 pl-10"
             />
           </div>
         )}

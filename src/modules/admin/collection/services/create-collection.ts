@@ -3,7 +3,9 @@ import { CollectionMapper } from "../mappers";
 import { CollectionEntity } from "../interfaces";
 import { CreateCollectionDto } from "../dto";
 
-export const createCollection = async (data: CreateCollectionDto): Promise<CollectionEntity> => {
+export const createCollection = async (
+  data: CreateCollectionDto
+): Promise<CollectionEntity> => {
   try {
     const collection = await prisma.collection.create({
       data: {

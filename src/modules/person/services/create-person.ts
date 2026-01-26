@@ -1,9 +1,14 @@
 import { prisma } from "@/lib/prisma";
-import { createPersonDto, CreatePersonDto } from "@/modules/person/dto/person.dto";
+import {
+  createPersonDto,
+  CreatePersonDto,
+} from "@/modules/person/dto/person.dto";
 import { PersonEntity } from "@/modules/person/interfaces/person.interface";
 import { PersonMapper } from "@/modules/person/mappers/person.mapper";
 
-export const createPersonService = async (personData: CreatePersonDto): Promise<PersonEntity> => {
+export const createPersonService = async (
+  personData: CreatePersonDto
+): Promise<PersonEntity> => {
   try {
     const parsed = createPersonDto.parse(personData);
 

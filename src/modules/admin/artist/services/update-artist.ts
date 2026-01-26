@@ -5,18 +5,18 @@ import {
 } from "@/modules/admin/artist/dto/artist.dto";
 import { ArtistEntity } from "@/modules/admin/artist/interfaces";
 import { ArtistMapper } from "@/modules/admin/artist/mappers";
-import { ARTIST_CLIENT_ROLE } from "@/modules/admin/artist/constants";
 
 export const updateArtistService = async (
   artist: UpdateArtistDto
 ): Promise<ArtistEntity> => {
   try {
     const parsed = updateArtistDto.parse(artist);
-    
+
     // Normalize email once for consistent use
-    const fullName = `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
+    const fullName =
+      `${parsed.person.name} ${parsed.person.last_name_business_name}`.trim();
     const email = parsed.person.email.trim().toLowerCase();
-    
+
     // Update person first
     await prisma.person.update({
       where: { id: parsed.person_id },
@@ -51,7 +51,7 @@ export const updateArtistService = async (
         data: {
           name: fullName,
           email,
-          role: [...ARTIST_CLIENT_ROLE],
+          role: "artist",
         },
       });
     }

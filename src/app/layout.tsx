@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Domine } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/shared/providers/theme-provider";
 import { Toaster } from "@/shared/components/sonner/sonner";
@@ -16,6 +16,12 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
 });
 
+const domine = Domine({
+  subsets: ["latin"],
+  variable: "--font-domine",
+  weight: ["400", "700"],
+});
+
 export const metadata: Metadata = {
   title: "El Rincon del Arte - Marketplace de Arte",
   description: "Marketplace de arte para artistas y coleccionistas",
@@ -29,10 +35,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfairDisplay.variable}`}
+      className={`${inter.variable} ${playfairDisplay.variable} ${domine.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans bg-background">
+      <body className="bg-background font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

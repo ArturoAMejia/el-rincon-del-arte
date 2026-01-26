@@ -1,1 +1,1 @@
-export * from "./artwork.interface"
+export * from "./artwork.interface";

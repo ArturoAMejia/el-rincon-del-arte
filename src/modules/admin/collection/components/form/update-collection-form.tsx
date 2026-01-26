@@ -116,7 +116,7 @@ export const UpdateCollectionForm = ({
                   <FormControl>
                     <Textarea
                       placeholder="Ingrese una descripción para la colección"
-                      className="resize-none w-full"
+                      className="w-full resize-none"
                       {...field}
                     />
                   </FormControl>

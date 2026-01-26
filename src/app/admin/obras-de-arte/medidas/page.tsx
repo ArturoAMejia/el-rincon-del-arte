@@ -21,7 +21,7 @@ export default async function Page() {
         {allSizes.success ? (
           <DataTable columns={sizesColumns} data={allSizes.data} />
         ) : (
-          <div className="text-red-600 font-semibold py-4">
+          <div className="py-4 font-semibold text-red-600">
             Ocurrió un error al cargar las medidas. Por favor, inténtalo de
             nuevo más tarde.
           </div>

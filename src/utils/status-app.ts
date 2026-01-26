@@ -5,4 +5,6 @@ export const statusLabels: Record<number, string> = {
   4: "Borrado",
   5: "Vendido",
   6: "Reservado",
+  7: "Disponible",
+  8: "Enviado",
 };

@@ -15,8 +15,14 @@ export const reactivateClientService = async (id: number): Promise<void> => {
 
       // Reactivate related person and any users linked to that person (if any)
       if (client.person) {
-        await tx.person.update({ where: { id: client.person.id }, data: { state_id: 1 } });
-        await tx.user.updateMany({ where: { personId: client.person.id }, data: { stateId: 1 } });
+        await tx.person.update({
+          where: { id: client.person.id },
+          data: { state_id: 1 },
+        });
+        await tx.user.updateMany({
+          where: { personId: client.person.id },
+          data: { stateId: 1 },
+        });
       }
     });
   } catch (error) {
